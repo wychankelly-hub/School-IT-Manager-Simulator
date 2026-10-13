@@ -80,17 +80,6 @@ school-it-manager-simulator/
 
 學生只需要 Web App URL，不需要 Google Sheet 權限。
 
-## 學生資料及私隱
-
-不要把以下內容提交到公開 GitHub repository：
-
-- 真實學生資料
-- Google Sheet exports
-- Google access token
-- credentials
-- 私人 deployment URL
-- API key
-- 學校內部敏感資料
 
 ## License
 
