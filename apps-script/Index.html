@@ -1,1666 +1,7848 @@
 <!DOCTYPE html>
+
 <html lang="zh-Hant">
+
 <head>
+
   <base target="_top">
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
 
   <style>
+
     :root {
+
       --blue: #2563eb;
+
       --green: #15803d;
       --green-light: #dcfce7;
+
       --orange: #c2410c;
       --orange-light: #ffedd5;
+
       --red: #b91c1c;
       --red-light: #fee2e2;
+
       --gray-100: #f1f5f9;
       --gray-200: #e2e8f0;
       --gray-500: #64748b;
       --gray-700: #334155;
       --gray-900: #0f172a;
+
     }
 
-    * { box-sizing: border-box; }
+
+    * {
+
+      box-sizing:
+        border-box;
+
+    }
+
 
     body {
-      margin: 0;
-      font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-      background: #dbe6ef;
-      color: var(--gray-900);
+
+      margin:
+        0;
+
+      font-family:
+
+        "Noto Sans TC",
+
+        "PingFang TC",
+
+        "Microsoft JhengHei",
+
+        sans-serif;
+
+      background:
+        #dbe6ef;
+
+      color:
+        var(--gray-900);
+
     }
 
-    button,input,select,textarea { font-family: inherit; }
-    button { cursor: pointer; }
 
-    .muted { color: var(--gray-500); }
-    .good { color: var(--green); }
-    .bad { color: var(--red); }
-    .warning { color: var(--orange); }
-    .done { color: var(--green); font-weight: 800; }
+    button,
+    input,
+    select,
+    textarea {
+
+      font-family:
+        inherit;
+
+    }
+
+
+    button {
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .muted {
+
+      color:
+        var(--gray-500);
+
+    }
+
+
+    .good {
+
+      color:
+        var(--green);
+
+    }
+
+
+    .bad {
+
+      color:
+        var(--red);
+
+    }
+
+
+    .warning {
+
+      color:
+        var(--orange);
+
+    }
+
+
+    .done {
+
+      color:
+        var(--green);
+
+      font-weight:
+        800;
+
+    }
+
+
+    /* ======================================================
+       BUTTONS
+    ====================================================== */
+
 
     .btn {
-      min-height: 44px;
-      border: 1px solid var(--gray-200);
-      border-radius: 9px;
-      padding: 10px 16px;
-      font-weight: 700;
-      background: white;
-      color: var(--gray-900);
+
+      min-height:
+        44px;
+
+      border:
+        1px solid
+        var(--gray-200);
+
+      border-radius:
+        9px;
+
+      padding:
+        10px 16px;
+
+      font-weight:
+        700;
+
+      background:
+        white;
+
+      color:
+        var(--gray-900);
+
     }
 
-    .btn:hover { background: var(--gray-100); }
-    .btn-primary { background: var(--blue); color: white; border-color: var(--blue); }
-    .btn-success { background: var(--green); color: white; border-color: var(--green); }
-    .btn-danger { background: var(--red); color: white; border-color: var(--red); }
-    .btn:disabled { opacity: .45; cursor: not-allowed; }
 
-    .login-page { width: min(600px,92%); margin: 60px auto; }
+    .btn:hover {
+
+      background:
+        var(--gray-100);
+
+    }
+
+
+    .btn-primary {
+
+      background:
+        var(--blue);
+
+      color:
+        white;
+
+      border-color:
+        var(--blue);
+
+    }
+
+
+    .btn-success {
+
+      background:
+        var(--green);
+
+      color:
+        white;
+
+      border-color:
+        var(--green);
+
+    }
+
+
+    .btn-danger {
+
+      background:
+        var(--red);
+
+      color:
+        white;
+
+      border-color:
+        var(--red);
+
+    }
+
+
+    .btn:disabled {
+
+      opacity:
+        0.45;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    /* ======================================================
+       LOGIN
+    ====================================================== */
+
+
+    .login-page {
+
+      width:
+        min(
+          600px,
+          92%
+        );
+
+      margin:
+        60px auto;
+
+    }
+
 
     .login-card {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 15px 40px rgba(15,23,42,.15);
+
+      background:
+        white;
+
+      border-radius:
+        20px;
+
+      padding:
+        30px;
+
+      box-shadow:
+        0 15px 40px
+        rgba(
+          15,
+          23,
+          42,
+          0.15
+        );
+
     }
 
-    .login-card h1 { margin-top: 0; }
-    .field { margin-bottom: 18px; }
+
+    .login-card h1 {
+
+      margin-top:
+        0;
+
+    }
+
+
+    .field {
+
+      margin-bottom:
+        18px;
+
+    }
+
 
     .field label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 7px;
+
+      display:
+        block;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        7px;
+
     }
 
-    .field input,.field select,textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 16px;
-      background: white;
+
+    .field input,
+    .field select,
+    textarea {
+
+      width:
+        100%;
+
+      padding:
+        12px 14px;
+
+      border:
+        1px solid
+        #cbd5e1;
+
+      border-radius:
+        10px;
+
+      font-size:
+        16px;
+
+      background:
+        white;
+
     }
 
-    textarea { min-height: 95px; resize: vertical; }
 
-    .hub { width: min(950px,94%); margin: 30px auto; }
+    textarea {
+
+      min-height:
+        95px;
+
+      resize:
+        vertical;
+
+    }
+
+
+    /* ======================================================
+       HUB
+    ====================================================== */
+
+
+    .hub {
+
+      width:
+        min(
+          950px,
+          94%
+        );
+
+      margin:
+        30px auto;
+
+    }
+
 
     .hub-header {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      margin-bottom: 18px;
+
+      background:
+        white;
+
+      padding:
+        20px;
+
+      border-radius:
+        16px;
+
+      margin-bottom:
+        18px;
+
     }
+
 
     .case-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-      gap: 15px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            260px,
+            1fr
+          )
+        );
+
+      gap:
+        15px;
+
     }
+
 
     .case-card {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      border: 1px solid var(--gray-200);
+
+      background:
+        white;
+
+      border-radius:
+        15px;
+
+      padding:
+        20px;
+
+      border:
+        1px solid
+        var(--gray-200);
+
     }
 
-    .case-card h3 { margin-top: 5px; }
+
+    .case-card h3 {
+
+      margin-top:
+        5px;
+
+    }
+
+
+    /* ======================================================
+       DESKTOP
+    ====================================================== */
+
 
     .desktop {
-      min-height: 100vh;
+
+      min-height:
+        100vh;
+
       background:
-        radial-gradient(circle at 70% 30%,rgba(255,255,255,.45),transparent 30%),
-        linear-gradient(135deg,#78a9c7,#d4e4ee 52%,#8fb6ca);
-      display: flex;
-      flex-direction: column;
+
+        radial-gradient(
+          circle at 70% 30%,
+          rgba(
+            255,
+            255,
+            255,
+            0.45
+          ),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #78a9c7,
+          #d4e4ee 52%,
+          #8fb6ca
+        );
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
     }
+
 
     .desktop-top {
-      min-height: 58px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 9px 18px;
-      background: rgba(255,255,255,.92);
-      border-bottom: 1px solid rgba(100,116,139,.3);
+
+      min-height:
+        58px;
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      padding:
+        9px 18px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.92
+        );
+
+      border-bottom:
+        1px solid
+        rgba(
+          100,
+          116,
+          139,
+          0.3
+        );
+
     }
 
-    .case-name { font-weight: 800; }
+
+    .case-name {
+
+      font-weight:
+        800;
+
+    }
+
 
     .system-summary {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+
+      display:
+        flex;
+
+      gap:
+        8px;
+
+      flex-wrap:
+        wrap;
+
+      justify-content:
+        flex-end;
+
     }
+
 
     .mini-stat {
-      background: white;
-      border: 1px solid var(--gray-200);
-      border-radius: 8px;
-      padding: 5px 9px;
-      font-size: 13px;
-      font-weight: 700;
+
+      background:
+        white;
+
+      border:
+        1px solid
+        var(--gray-200);
+
+      border-radius:
+        8px;
+
+      padding:
+        5px 9px;
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
     }
+
 
     .desktop-main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 145px 1fr;
-      gap: 15px;
-      padding: 18px 18px 75px;
+
+      flex:
+        1;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        145px 1fr;
+
+      gap:
+        15px;
+
+      padding:
+        18px;
+
+      padding-bottom:
+        75px;
+
     }
+
+
+    /*
+      Wide screen：
+      Firewall Security Alert 出現時，
+      幫主視窗預留右邊空間，
+      避免 Alert 預設蓋住 Firewall controls。
+    */
+    @media (
+      min-width:
+        1100px
+    ) {
+
+      .desktop.security-mode
+      .desktop-main {
+
+        padding-right:
+          430px;
+
+      }
+
+    }
+
+
+    /* ======================================================
+       APP ICONS
+    ====================================================== */
+
 
     .desktop-icons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        10px;
+
     }
+
 
     .app-icon {
-      color: #102a43;
-      background: rgba(255,255,255,.68);
-      border: 1px solid transparent;
-      border-radius: 12px;
-      padding: 10px 6px;
-      min-height: 82px;
-      text-align: center;
-      font-size: 12px;
+
+      color:
+        #102a43;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.68
+        );
+
+      border:
+        1px solid
+        transparent;
+
+      border-radius:
+        12px;
+
+      padding:
+        10px 6px;
+
+      min-height:
+        82px;
+
+      text-align:
+        center;
+
+      font-size:
+        12px;
+
     }
 
-    .app-icon:hover { background: white; border-color: var(--blue); }
-    .app-icon-symbol { display: block; font-size: 28px; margin-bottom: 5px; }
+
+    .app-icon:hover {
+
+      background:
+        white;
+
+      border-color:
+        var(--blue);
+
+    }
+
+
+    .app-icon-symbol {
+
+      display:
+        block;
+
+      font-size:
+        28px;
+
+      margin-bottom:
+        5px;
+
+    }
+
+
+    /* ======================================================
+       MAIN WINDOW
+    ====================================================== */
+
 
     .window-area {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-width: 0;
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      align-items:
+        flex-start;
+
+      min-width:
+        0;
+
     }
+
 
     .window {
-      width: min(920px,100%);
-      background: rgba(255,255,255,.98);
-      border: 1px solid #9caebc;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(15,23,42,.18);
+
+      width:
+        min(
+          920px,
+          100%
+        );
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.98
+        );
+
+      border:
+        1px solid
+        #9caebc;
+
+      border-radius:
+        12px;
+
+      overflow:
+        hidden;
+
+      box-shadow:
+        0 15px 35px
+        rgba(
+          15,
+          23,
+          42,
+          0.18
+        );
+
     }
+
 
     .window-titlebar {
-      background: #eff4f7;
-      border-bottom: 1px solid var(--gray-200);
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 14px;
-      font-weight: 800;
+
+      background:
+        #eff4f7;
+
+      border-bottom:
+        1px solid
+        var(--gray-200);
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      padding:
+        10px 14px;
+
+      font-weight:
+        800;
+
     }
 
-    .window-content { padding: 20px; min-height: 430px; line-height: 1.55; }
+
+    .window-content {
+
+      padding:
+        20px;
+
+      min-height:
+        430px;
+
+      line-height:
+        1.55;
+
+    }
+
+
+    /* ======================================================
+       STATUS
+    ====================================================== */
+
 
     .status-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-      gap: 10px;
-      margin: 15px 0;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            150px,
+            1fr
+          )
+        );
+
+      gap:
+        10px;
+
+      margin:
+        15px 0;
+
     }
+
 
     .status-card {
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      padding: 13px;
-      background: #fafcfd;
+
+      border:
+        1px solid
+        var(--gray-200);
+
+      border-radius:
+        10px;
+
+      padding:
+        13px;
+
+      background:
+        #fafcfd;
+
     }
 
-    .status-label { font-size: 13px; color: var(--gray-500); }
-    .status-value { font-size: 23px; font-weight: 800; margin-top: 3px; }
+
+    .status-label {
+
+      font-size:
+        13px;
+
+      color:
+        var(--gray-500);
+
+    }
+
+
+    .status-value {
+
+      font-size:
+        23px;
+
+      font-weight:
+        800;
+
+      margin-top:
+        3px;
+
+    }
+
 
     .progress {
-      height: 9px;
-      border-radius: 99px;
-      background: #e5e7eb;
-      overflow: hidden;
-      margin-top: 7px;
+
+      height:
+        9px;
+
+      border-radius:
+        99px;
+
+      background:
+        #e5e7eb;
+
+      overflow:
+        hidden;
+
+      margin-top:
+        7px;
+
     }
 
-    .progress-fill { height: 100%; background: var(--blue); transition: width .35s; }
-    .progress-fill.bad { background: var(--red); }
-    .progress-fill.good { background: var(--green); }
 
-    table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-    th,td { padding: 10px 9px; border-bottom: 1px solid var(--gray-200); text-align: left; }
-    th { background: var(--gray-100); }
-    .highlight-row { background: var(--red-light); }
+    .progress-fill {
+
+      height:
+        100%;
+
+      background:
+        var(--blue);
+
+      transition:
+        width 0.35s;
+
+    }
+
+
+    .progress-fill.bad {
+
+      background:
+        var(--red);
+
+    }
+
+
+    .progress-fill.good {
+
+      background:
+        var(--green);
+
+    }
+
+
+    /* ======================================================
+       TABLE
+    ====================================================== */
+
+
+    table {
+
+      width:
+        100%;
+
+      border-collapse:
+        collapse;
+
+      margin:
+        15px 0;
+
+    }
+
+
+    th,
+    td {
+
+      padding:
+        10px 9px;
+
+      border-bottom:
+        1px solid
+        var(--gray-200);
+
+      text-align:
+        left;
+
+    }
+
+
+    th {
+
+      background:
+        var(--gray-100);
+
+    }
+
+
+    .highlight-row {
+
+      background:
+        var(--red-light);
+
+    }
+
+
+    /* ======================================================
+       MESSAGES
+    ====================================================== */
+
 
     .ticket {
-      border-left: 5px solid var(--blue);
-      background: #f8fbff;
-      padding: 14px;
-      border-radius: 9px;
-      margin-bottom: 15px;
+
+      border-left:
+        5px solid
+        var(--blue);
+
+      background:
+        #f8fbff;
+
+      padding:
+        14px;
+
+      border-radius:
+        9px;
+
+      margin-bottom:
+        15px;
+
     }
+
 
     .result {
-      margin-top: 15px;
-      border-left: 4px solid var(--blue);
-      background: #eff6ff;
-      border-radius: 8px;
-      padding: 13px;
+
+      margin-top:
+        15px;
+
+      border-left:
+        4px solid
+        var(--blue);
+
+      background:
+        #eff6ff;
+
+      border-radius:
+        8px;
+
+      padding:
+        13px;
+
     }
 
-    .result.good-result { border-left-color: var(--green); background: var(--green-light); }
-    .result.warning-result { border-left-color: var(--orange); background: var(--orange-light); }
-    .result.danger-result { border-left-color: var(--red); background: var(--red-light); }
+
+    .result.good-result {
+
+      border-left-color:
+        var(--green);
+
+      background:
+        var(--green-light);
+
+    }
+
+
+    .result.warning-result {
+
+      border-left-color:
+        var(--orange);
+
+      background:
+        var(--orange-light);
+
+    }
+
+
+    .result.danger-result {
+
+      border-left-color:
+        var(--red);
+
+      background:
+        var(--red-light);
+
+    }
+
 
     .action-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 15px;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        9px;
+
+      margin-top:
+        15px;
+
     }
+
+
+    /* ======================================================
+       TASKBAR
+    ====================================================== */
+
 
     .taskbar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      min-height: 52px;
-      background: rgba(15,23,42,.94);
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 6px 12px;
-      z-index: 50;
+
+      position:
+        fixed;
+
+      left:
+        0;
+
+      right:
+        0;
+
+      bottom:
+        0;
+
+      min-height:
+        52px;
+
+      background:
+        rgba(
+          15,
+          23,
+          42,
+          0.94
+        );
+
+      color:
+        white;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        9px;
+
+      padding:
+        6px 12px;
+
+      z-index:
+        50;
+
     }
 
-    .taskbar-spacer { flex: 1; }
 
-    .summary-screen { width: min(860px,94%); margin: 30px auto 90px; }
+    .taskbar-spacer {
+
+      flex:
+        1;
+
+    }
+
+
+    /* ======================================================
+       SUMMARY
+    ====================================================== */
+
+
+    .summary-screen {
+
+      width:
+        min(
+          860px,
+          94%
+        );
+
+      margin:
+        30px auto 90px;
+
+    }
+
 
     .summary-card {
-      background: white;
-      border-radius: 18px;
-      padding: 24px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(15,23,42,.08);
+
+      background:
+        white;
+
+      border-radius:
+        18px;
+
+      padding:
+        24px;
+
+      margin-bottom:
+        16px;
+
+      box-shadow:
+        0 8px 20px
+        rgba(
+          15,
+          23,
+          42,
+          0.08
+        );
+
     }
 
-    .summary-success { text-align: center; }
-    .summary-success .big-icon { font-size: 58px; }
-    .timeline { border-left: 3px solid var(--gray-200); padding-left: 16px; }
-    .timeline-item { margin-bottom: 12px; }
-    .timeline-time { color: var(--gray-500); font-size: 12px; }
+
+    .summary-success {
+
+      text-align:
+        center;
+
+    }
+
+
+    .summary-success
+    .big-icon {
+
+      font-size:
+        58px;
+
+    }
+
+
+    .timeline {
+
+      border-left:
+        3px solid
+        var(--gray-200);
+
+      padding-left:
+        16px;
+
+    }
+
+
+    .timeline-item {
+
+      margin-bottom:
+        12px;
+
+    }
+
+
+    .timeline-time {
+
+      color:
+        var(--gray-500);
+
+      font-size:
+        12px;
+
+    }
+
 
     .concept-box {
-      background: #eef6ff;
-      border: 1px solid #c9ddf8;
-      border-radius: 12px;
-      padding: 16px;
+
+      background:
+        #eef6ff;
+
+      border:
+        1px solid
+        #c9ddf8;
+
+      border-radius:
+        12px;
+
+      padding:
+        16px;
+
     }
+
+
+    /* ======================================================
+       NORMAL MODAL
+    ====================================================== */
+
 
     .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(15,23,42,.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        100;
+
+      background:
+        rgba(
+          15,
+          23,
+          42,
+          0.55
+        );
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        20px;
+
     }
+
 
     .modal-card {
-      width: min(520px,100%);
-      background: white;
-      padding: 22px;
-      border-radius: 15px;
+
+      width:
+        min(
+          520px,
+          100%
+        );
+
+      background:
+        white;
+
+      padding:
+        22px;
+
+      border-radius:
+        15px;
+
     }
+
+
+    /* ======================================================
+       MOVABLE FIREWALL ALERT
+    ====================================================== */
+
 
     .security-alert-floating {
-      position: fixed;
-      right: 18px;
-      bottom: 72px;
-      z-index: 9999;
-      width: min(390px,calc(100vw - 36px));
-      background: white;
-      border: 3px solid var(--red);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 16px 50px rgba(0,0,0,.32);
+
+      position:
+        fixed;
+
+      right:
+        18px;
+
+      top:
+        78px;
+
+      z-index:
+        9999;
+
+      width:
+        min(
+          390px,
+          calc(
+            100vw - 36px
+          )
+        );
+
+      background:
+        white;
+
+      border:
+        3px solid
+        var(--red);
+
+      border-radius:
+        14px;
+
+      overflow:
+        hidden;
+
+      box-shadow:
+        0 16px 50px
+        rgba(
+          0,
+          0,
+          0,
+          0.32
+        );
+
     }
+
 
     .security-alert-header {
-      background: var(--red);
-      color: white;
-      padding: 11px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 900;
-      cursor: move;
-      user-select: none;
-      touch-action: none;
+
+      background:
+        var(--red);
+
+      color:
+        white;
+
+      padding:
+        11px 14px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      font-weight:
+        900;
+
+      cursor:
+        move;
+
+      user-select:
+        none;
+
+      touch-action:
+        none;
+
     }
 
-    .security-alert-icon { font-size: 24px; }
-    .security-alert-title { flex: 1; }
+
+    .security-alert-icon {
+
+      font-size:
+        24px;
+
+    }
+
+
+    .security-alert-title {
+
+      flex:
+        1;
+
+    }
+
 
     .security-alert-lock {
-      font-size: 12px;
-      background: rgba(255,255,255,.18);
-      padding: 4px 7px;
-      border-radius: 6px;
-      white-space: nowrap;
+
+      font-size:
+        12px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.18
+        );
+
+      padding:
+        4px 7px;
+
+      border-radius:
+        6px;
+
+      white-space:
+        nowrap;
+
     }
+
 
     .security-alert-body {
-      padding: 15px;
-      max-height: 390px;
-      overflow-y: auto;
+
+      padding:
+        15px;
+
+      max-height:
+        400px;
+
+      overflow-y:
+        auto;
+
     }
+
 
     .security-danger-title {
-      color: var(--red);
-      font-size: 20px;
-      font-weight: 900;
-      margin: 0 0 8px;
+
+      color:
+        var(--red);
+
+      font-size:
+        20px;
+
+      font-weight:
+        900;
+
+      margin:
+        0 0 8px;
+
     }
+
 
     .security-score-box {
-      padding: 11px;
-      margin: 12px 0;
-      border: 2px solid #fecaca;
-      border-radius: 9px;
-      background: #fff1f2;
+
+      padding:
+        11px;
+
+      margin:
+        12px 0;
+
+      border:
+        2px solid
+        #fecaca;
+
+      border-radius:
+        9px;
+
+      background:
+        #fff1f2;
+
     }
 
-    .security-score-number { color: var(--red); font-size: 28px; font-weight: 900; }
+
+    .security-score-number {
+
+      color:
+        var(--red);
+
+      font-size:
+        28px;
+
+      font-weight:
+        900;
+
+    }
+
 
     .security-event-list {
-      border: 1px solid #fecaca;
-      border-radius: 9px;
-      overflow: hidden;
-      margin: 11px 0;
+
+      border:
+        1px solid
+        #fecaca;
+
+      border-radius:
+        9px;
+
+      overflow:
+        hidden;
+
+      margin:
+        11px 0;
+
     }
+
 
     .security-event {
-      padding: 8px 10px;
-      border-bottom: 1px solid #fecaca;
-      background: #fff7f7;
-      font-size: 14px;
+
+      padding:
+        8px 10px;
+
+      border-bottom:
+        1px solid
+        #fecaca;
+
+      background:
+        #fff7f7;
+
+      font-size:
+        14px;
+
     }
 
-    .security-event:last-child { border-bottom: 0; }
+
+    .security-event:last-child {
+
+      border-bottom:
+        0;
+
+    }
+
 
     .security-alert-note {
-      font-size: 13px;
-      color: var(--gray-700);
-      background: var(--gray-100);
-      padding: 9px;
-      border-radius: 7px;
-      margin-top: 10px;
+
+      font-size:
+        13px;
+
+      color:
+        var(--gray-700);
+
+      background:
+        var(--gray-100);
+
+      padding:
+        9px;
+
+      border-radius:
+        7px;
+
+      margin-top:
+        10px;
+
     }
+
 
     .security-alert-instruction {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 8px;
-      background: #eff6ff;
-      border-left: 4px solid var(--blue);
-      font-weight: 700;
+
+      margin-top:
+        10px;
+
+      padding:
+        10px;
+
+      border-radius:
+        8px;
+
+      background:
+        #eff6ff;
+
+      border-left:
+        4px solid
+        var(--blue);
+
+      font-weight:
+        700;
+
     }
 
-    @media (max-width:720px) {
-      .desktop-main { grid-template-columns: 1fr; }
-      .desktop-icons { display: grid; grid-template-columns: repeat(3,1fr); }
-      .desktop-top { align-items: flex-start; flex-direction: column; }
-      .system-summary { justify-content: flex-start; }
-      .taskbar { flex-wrap: wrap; }
+
+    /* ======================================================
+       RESPONSIVE
+    ====================================================== */
+
+
+    @media (
+      max-width:
+        720px
+    ) {
+
+      .desktop-main {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .desktop-icons {
+
+        display:
+          grid;
+
+        grid-template-columns:
+          repeat(
+            3,
+            1fr
+          );
+
+      }
+
+
+      .desktop-top {
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+      }
+
+
+      .system-summary {
+
+        justify-content:
+          flex-start;
+
+      }
+
+
+      .taskbar {
+
+        flex-wrap:
+          wrap;
+
+      }
+
 
       .security-alert-floating {
-        right: 8px;
-        bottom: 92px;
-        width: min(350px,calc(100vw - 16px));
+
+        right:
+          8px;
+
+        top:
+          110px;
+
+        width:
+          min(
+            350px,
+            calc(
+              100vw - 16px
+            )
+          );
+
       }
+
     }
+
   </style>
+
 </head>
 
+
 <body>
-<div id="app"></div>
+
+<div id="app">
+</div>
+
 
 <script>
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+
+const MAX_LOCAL_EVENTS =
+  180;
+
+
+const MAX_PROGRESS_ATTEMPTS =
+  4;
+
+
+const MAX_SUBMIT_ATTEMPTS =
+  5;
+
+
+/*
+  Server calls：
+
+  Login：
+  1 × getProgress()
+
+  Playing：
+  0 calls
+
+  Case Submit：
+  1 × submitCase()
+
+  所有 actions 都只存在 browser memory。
+*/
+
+
+/* =========================================================
+   CASE DATA
+========================================================= */
+
+
 const CASES = {
+
+
+  /* =======================================================
+     CASE 1
+  ======================================================= */
+
+
   CASE01_DRIVER: {
-    id: 'CASE01_DRIVER',
-    title: '新打印機不能正常使用',
-    subtitle: '驅動程式（Device Driver）',
-    ticket: `電腦室安裝了一部新打印機。電腦能夠偵測打印機，但無法正常列印。`,
-    facts: ['打印機已開啟','USB 線已正確連接','其他電腦可以正常使用打印機'],
-    initialState: {
-      cpu: 22, memory: 46, freeDisk: 68, cleanupPerformed: false,
-      firewallOn: true, securityScore: 100, malware: 0, virusScanned: false,
-      printerWorking: false, driverWarning: true, driverChecked: false,
-      meetingWorking: true, firewallChecked: false
-    },
-    correctAnswer: '驅動程式（Device Driver）出現兼容性問題',
-    answerOptions: [
-      '驅動程式（Device Driver）出現兼容性問題',
-      '儲存空間不足','電腦感染惡意軟件','防火牆阻擋打印機'
+
+    id:
+      'CASE01_DRIVER',
+
+    title:
+      '新打印機不能正常使用',
+
+    subtitle:
+      '驅動程式（Device Driver）',
+
+    ticket:
+
+      `電腦室安裝了一部新打印機。
+      電腦能夠偵測打印機，但無法正常列印。`,
+
+
+    facts: [
+
+      '打印機已開啟',
+
+      'USB 線已正確連接',
+
+      '其他電腦可以正常使用打印機'
+
     ],
-    fixed(state) {
-      return state.printerWorking === true && state.firewallOn === true;
+
+
+    initialState: {
+
+      cpu:
+        22,
+
+      memory:
+        46,
+
+      freeDisk:
+        68,
+
+      cleanupPerformed:
+        false,
+
+      firewallOn:
+        true,
+
+      securityScore:
+        100,
+
+      malware:
+        0,
+
+      virusScanned:
+        false,
+
+      printerWorking:
+        false,
+
+      driverWarning:
+        true,
+
+      driverChecked:
+        false,
+
+      meetingWorking:
+        true,
+
+      firewallChecked:
+        false
+
     },
+
+
+    correctAnswer:
+      '驅動程式（Device Driver）出現兼容性問題',
+
+
+    answerOptions: [
+
+      '驅動程式（Device Driver）出現兼容性問題',
+
+      '儲存空間不足',
+
+      '電腦感染惡意軟件',
+
+      '防火牆阻擋打印機'
+
+    ],
+
+
+    fixed(state) {
+
+      return (
+
+        state.printerWorking ===
+          true &&
+
+        state.firewallOn ===
+          true
+
+      );
+
+    },
+
+
     summary: {
-      cause: '打印機的驅動程式與目前的操作系統版本不完全相容。',
-      evidence: '裝置管理員顯示打印機驅動程式出現兼容性警告。',
-      concept: '驅動程式（Device Driver）讓操作系統與特定硬件裝置進行通訊及控制該裝置。',
-      bestAction: '安裝／更新與操作系統相容的打印機驅動程式。'
+
+      cause:
+        '打印機的驅動程式與目前的操作系統版本不完全相容。',
+
+      evidence:
+        '裝置管理員顯示打印機驅動程式出現兼容性警告。',
+
+      concept:
+        '驅動程式（Device Driver）讓操作系統與特定硬件裝置進行通訊及控制該裝置。',
+
+      bestAction:
+        '安裝／更新與操作系統相容的打印機驅動程式。'
+
     }
+
   },
+
+
+  /* =======================================================
+     CASE 2
+  ======================================================= */
+
 
   CASE02_CPU: {
-    id: 'CASE02_CPU',
-    title: '電腦突然非常慢',
-    subtitle: 'CPU／工作管理員（Task Manager）',
-    ticket: `陳老師表示：「今朝開始部電腦突然好慢，開 PowerPoint 都要等好耐。」`,
-    facts: ['昨天運作正常','電腦可以正常開機','網絡正常','沒有錯誤訊息'],
-    initialState: {
-      cpu: 97, memory: 54, freeDisk: 18, cleanupPerformed: false,
-      firewallOn: true, securityScore: 100, malware: 0, virusScanned: false,
-      culpritRunning: true, printerWorking: true, driverWarning: false,
-      meetingWorking: true, firewallChecked: false
-    },
-    correctAnswer: '某個程式大量使用 CPU',
-    answerOptions: [
-      '某個程式大量使用 CPU','儲存空間不足',
-      '電腦感染惡意軟件','驅動程式出現問題'
+
+    id:
+      'CASE02_CPU',
+
+    title:
+      '電腦突然非常慢',
+
+    subtitle:
+      'CPU／工作管理員（Task Manager）',
+
+    ticket:
+
+      `陳老師表示：
+      「今朝開始部電腦突然好慢，
+      開 PowerPoint 都要等好耐。」`,
+
+
+    facts: [
+
+      '昨天運作正常',
+
+      '電腦可以正常開機',
+
+      '網絡正常',
+
+      '沒有錯誤訊息'
+
     ],
-    shortQuestion: '為甚麼磁碟清理（Disk Cleanup）不是解決這部電腦變慢的主要方法？',
-    fixed(state) {
-      return state.cpu < 50 && state.firewallOn === true;
+
+
+    initialState: {
+
+      cpu:
+        97,
+
+      memory:
+        54,
+
+      freeDisk:
+        18,
+
+      cleanupPerformed:
+        false,
+
+      firewallOn:
+        true,
+
+      securityScore:
+        100,
+
+      malware:
+        0,
+
+      virusScanned:
+        false,
+
+      culpritRunning:
+        true,
+
+      printerWorking:
+        true,
+
+      driverWarning:
+        false,
+
+      meetingWorking:
+        true,
+
+      firewallChecked:
+        false
+
     },
+
+
+    correctAnswer:
+      '某個程式大量使用 CPU',
+
+
+    answerOptions: [
+
+      '某個程式大量使用 CPU',
+
+      '儲存空間不足',
+
+      '電腦感染惡意軟件',
+
+      '驅動程式出現問題'
+
+    ],
+
+
+    shortQuestion:
+      '為甚麼磁碟清理（Disk Cleanup）不是解決這部電腦變慢的主要方法？',
+
+
+    fixed(state) {
+
+      return (
+
+        state.cpu < 50 &&
+
+        state.firewallOn ===
+          true
+
+      );
+
+    },
+
+
     summary: {
-      cause: 'VideoRender.exe 大量使用 CPU，令電腦回應速度下降。',
-      evidence: '工作管理員顯示 CPU 使用率為 97%，其中 VideoRender.exe 使用約 91%。',
-      concept: '工作管理員（Task Manager）可以查看程式及系統資源的使用情況，例如 CPU 和記憶體。',
-      bestAction: '確認程式不再需要，而且資料已儲存後，結束大量使用 CPU 的程式。'
+
+      cause:
+        'VideoRender.exe 大量使用 CPU，令電腦回應速度下降。',
+
+      evidence:
+        '工作管理員顯示 CPU 使用率為 97%，其中 VideoRender.exe 使用約 91%。',
+
+      concept:
+        '工作管理員（Task Manager）可以查看程式及系統資源的使用情況，例如 CPU 和記憶體。',
+
+      bestAction:
+        '確認程式不再需要，而且資料已儲存後，結束大量使用 CPU 的程式。'
+
     }
+
   },
+
+
+  /* =======================================================
+     CASE 3
+  ======================================================= */
+
 
   CASE03_STORAGE: {
-    id: 'CASE03_STORAGE',
-    title: '儲存空間快將用盡',
-    subtitle: '磁碟清理（Disk Cleanup）',
-    ticket: `圖書館的一部電腦經常顯示「儲存空間不足」，而且不能再儲存大型影片。`,
-    facts: ['電腦可以正常開機','CPU 使用情況正常','沒有可疑廣告','最近下載了很多影片及暫存檔案'],
+
+    id:
+      'CASE03_STORAGE',
+
+    title:
+      '儲存空間快將用盡',
+
+    subtitle:
+      '磁碟清理（Disk Cleanup）',
+
+    ticket:
+
+      `圖書館的一部電腦經常顯示
+      「儲存空間不足」，
+      而且不能再儲存大型影片。`,
+
+
+    facts: [
+
+      '電腦可以正常開機',
+
+      'CPU 使用情況正常',
+
+      '沒有可疑廣告',
+
+      '最近下載了很多影片及暫存檔案'
+
+    ],
+
+
     initialState: {
-      cpu: 18, memory: 49, freeDisk: 5, tempFiles: 26, cleanupPerformed: false,
-      firewallOn: true, securityScore: 100, malware: 0, virusScanned: false,
-      printerWorking: true, meetingWorking: true, firewallChecked: false
+
+      cpu:
+        18,
+
+      memory:
+        49,
+
+      freeDisk:
+        5,
+
+      tempFiles:
+        26,
+
+      cleanupPerformed:
+        false,
+
+      firewallOn:
+        true,
+
+      securityScore:
+        100,
+
+      malware:
+        0,
+
+      virusScanned:
+        false,
+
+      printerWorking:
+        true,
+
+      meetingWorking:
+        true,
+
+      firewallChecked:
+        false
+
     },
-    correctAnswer: '儲存空間不足',
-    answerOptions: ['儲存空間不足','CPU 使用率過高','防火牆問題','驅動程式問題'],
+
+
+    correctAnswer:
+      '儲存空間不足',
+
+
+    answerOptions: [
+
+      '儲存空間不足',
+
+      'CPU 使用率過高',
+
+      '防火牆問題',
+
+      '驅動程式問題'
+
+    ],
+
+
     fixed(state) {
-      return state.freeDisk >= 20 && state.firewallOn === true;
+
+      return (
+
+        state.freeDisk >= 20 &&
+
+        state.firewallOn ===
+          true
+
+      );
+
     },
+
+
     summary: {
-      cause: '電腦只剩下很少可用儲存空間，而且存在大量不需要的暫存檔案。',
-      evidence: 'C: Drive 只剩 5 GB 可用空間，而暫存檔案佔用了約 26 GB。',
-      concept: '磁碟清理（Disk Cleanup）可以刪除不需要的檔案，從而釋放儲存空間。',
-      bestAction: '執行磁碟清理，刪除不需要的暫存檔案。'
+
+      cause:
+        '電腦只剩下很少可用儲存空間，而且存在大量不需要的暫存檔案。',
+
+      evidence:
+        'C: Drive 只剩 5 GB 可用空間，而暫存檔案佔用了約 26 GB。',
+
+      concept:
+        '磁碟清理（Disk Cleanup）可以刪除不需要的檔案，從而釋放儲存空間。',
+
+      bestAction:
+        '執行磁碟清理，刪除不需要的暫存檔案。'
+
     }
+
   },
+
+
+  /* =======================================================
+     CASE 4
+  ======================================================= */
+
 
   CASE04_MALWARE: {
-    id: 'CASE04_MALWARE',
-    title: '不斷彈出可疑廣告',
-    subtitle: '抗電腦病毒軟件（Antivirus Software）',
-    ticket: `學生昨日下載了一個免費遊戲後，電腦開始不斷彈出廣告，瀏覽器亦會自動開啟奇怪網站。`,
-    facts: ['網絡仍然可以使用','問題在下載可疑程式後開始','瀏覽器不斷出現異常廣告'],
+
+    id:
+      'CASE04_MALWARE',
+
+    title:
+      '不斷彈出可疑廣告',
+
+    subtitle:
+      '抗電腦病毒軟件（Antivirus Software）',
+
+    ticket:
+
+      `學生昨日下載了一個免費遊戲後，
+      電腦開始不斷彈出廣告，
+      瀏覽器亦會自動開啟奇怪網站。`,
+
+
+    facts: [
+
+      '網絡仍然可以使用',
+
+      '問題在下載可疑程式後開始',
+
+      '瀏覽器不斷出現異常廣告'
+
+    ],
+
+
     initialState: {
-      cpu: 48, memory: 58, freeDisk: 55, cleanupPerformed: false,
-      firewallOn: true, securityScore: 100, malware: 3, virusScanned: false,
-      printerWorking: true, meetingWorking: true, firewallChecked: false
+
+      cpu:
+        48,
+
+      memory:
+        58,
+
+      freeDisk:
+        55,
+
+      cleanupPerformed:
+        false,
+
+      firewallOn:
+        true,
+
+      securityScore:
+        100,
+
+      malware:
+        3,
+
+      virusScanned:
+        false,
+
+      printerWorking:
+        true,
+
+      meetingWorking:
+        true,
+
+      firewallChecked:
+        false
+
     },
-    correctAnswer: '電腦可能受到惡意軟件影響',
-    answerOptions: ['電腦可能受到惡意軟件影響','打印機驅動程式出現問題','儲存空間不足','CPU 完全不能運作'],
+
+
+    correctAnswer:
+      '電腦可能受到惡意軟件影響',
+
+
+    answerOptions: [
+
+      '電腦可能受到惡意軟件影響',
+
+      '打印機驅動程式出現問題',
+
+      '儲存空間不足',
+
+      'CPU 完全不能運作'
+
+    ],
+
+
     fixed(state) {
-      return state.malware === 0 && state.firewallOn === true;
+
+      return (
+
+        state.malware === 0 &&
+
+        state.firewallOn ===
+          true
+
+      );
+
     },
+
+
     summary: {
-      cause: '下載可疑程式後，電腦受到惡意軟件影響。',
-      evidence: '抗電腦病毒軟件掃描發現可疑程式及惡意瀏覽器擴充功能。',
-      concept: '抗電腦病毒軟件（Antivirus Software）可以偵測、隔離及處理惡意軟件。',
-      bestAction: '執行病毒掃描，並隔離／移除確認為惡意的項目。'
+
+      cause:
+        '下載可疑程式後，電腦受到惡意軟件影響。',
+
+      evidence:
+        '抗電腦病毒軟件掃描發現可疑程式及惡意瀏覽器擴充功能。',
+
+      concept:
+        '抗電腦病毒軟件（Antivirus Software）可以偵測、隔離及處理惡意軟件。',
+
+      bestAction:
+        '執行病毒掃描，並隔離／移除確認為惡意的項目。'
+
     }
+
   },
 
+
+  /* =======================================================
+     CASE 5
+  ======================================================= */
+
+
   CASE05_FIREWALL: {
-    id: 'CASE05_FIREWALL',
-    title: '視像會議不能連線',
-    subtitle: '防火牆（Firewall）',
-    ticket: `學校準備與海外學校進行視像交流，但其中一部電腦的視像會議軟件無法連線。`,
-    facts: ['這部電腦可以正常瀏覽網頁','同一網絡的其他電腦可以正常使用視像會議','只有這部電腦出現問題'],
+
+    id:
+      'CASE05_FIREWALL',
+
+    title:
+      '視像會議不能連線',
+
+    subtitle:
+      '防火牆（Firewall）',
+
+    ticket:
+
+      `學校準備與海外學校進行視像交流，
+      但其中一部電腦的視像會議軟件
+      無法連線。`,
+
+
+    facts: [
+
+      '這部電腦可以正常瀏覽網頁',
+
+      '同一網絡的其他電腦可以正常使用視像會議',
+
+      '只有這部電腦出現問題'
+
+    ],
+
+
     initialState: {
-      cpu: 25, memory: 51, freeDisk: 62, cleanupPerformed: false,
-      firewallOn: true, securityScore: 100, firewallChecked: false,
-      meetingBlocked: true, meetingWorking: false, malware: 0,
-      virusScanned: false, printerWorking: true
+
+      cpu:
+        25,
+
+      memory:
+        51,
+
+      freeDisk:
+        62,
+
+      cleanupPerformed:
+        false,
+
+      firewallOn:
+        true,
+
+      securityScore:
+        100,
+
+      firewallChecked:
+        false,
+
+      meetingBlocked:
+        true,
+
+      meetingWorking:
+        false,
+
+      malware:
+        0,
+
+      virusScanned:
+        false,
+
+      printerWorking:
+        true
+
     },
-    correctAnswer: '防火牆規則阻擋了視像會議軟件',
-    answerOptions: ['防火牆規則阻擋了視像會議軟件','儲存空間不足','打印機驅動程式失效','電腦感染惡意軟件'],
-    shortQuestion: '為甚麼「完全關閉防火牆」不是最合適的處理方法？',
+
+
+    correctAnswer:
+      '防火牆規則阻擋了視像會議軟件',
+
+
+    answerOptions: [
+
+      '防火牆規則阻擋了視像會議軟件',
+
+      '儲存空間不足',
+
+      '打印機驅動程式失效',
+
+      '電腦感染惡意軟件'
+
+    ],
+
+
+    shortQuestion:
+      '為甚麼「完全關閉防火牆」不是最合適的處理方法？',
+
+
     fixed(state) {
-      return state.meetingWorking === true &&
-        state.firewallOn === true &&
-        state.meetingBlocked === false;
+
+      return (
+
+        state.meetingWorking ===
+          true &&
+
+        state.firewallOn ===
+          true &&
+
+        state.meetingBlocked ===
+          false
+
+      );
+
     },
+
+
     summary: {
-      cause: '防火牆的安全規則阻擋了視像會議軟件所需的網絡連線。',
-      evidence: '防火牆記錄顯示視像會議軟件的連線被規則阻擋。',
-      concept: '防火牆（Firewall）按照安全規則監察及控制網絡流量。',
-      bestAction: '由獲授權的人員調整必要的防火牆規則，而不是完全關閉防火牆。'
+
+      cause:
+        '防火牆的安全規則阻擋了視像會議軟件所需的網絡連線。',
+
+      evidence:
+        '防火牆記錄顯示視像會議軟件的連線被規則阻擋。',
+
+      concept:
+        '防火牆（Firewall）按照安全規則監察及控制網絡流量。',
+
+      bestAction:
+        '由獲授權的人員調整必要的防火牆規則，而不是完全關閉防火牆。'
+
     }
+
   }
+
 };
 
-const app = document.getElementById('app');
 
-let identity = null;
-let sessionId = '';
-let completedCases = new Set();
+/* =========================================================
+   APP LABELS
+========================================================= */
 
-let currentCase = null;
-let state = null;
-let actionHistory = [];
-let undoStack = [];
-let undoCount = 0;
-let actionCount = 0;
-let caseStartTime = 0;
-let lastApp = 'ticket';
-let lastMessage = '';
-let securityIncidentEver = false;
-let securityIncidentCount = 0;
+
+const APP_LABELS = {
+
+  ticket:
+    'IT 支援中心',
+
+  task:
+    '工作管理員（Task Manager）',
+
+  cleanup:
+    '磁碟清理（Disk Cleanup）',
+
+  antivirus:
+    '抗電腦病毒軟件（Antivirus Software）',
+
+  device:
+    '裝置管理員',
+
+  firewall:
+    '防火牆（Firewall）'
+
+};
+
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+
+const app =
+  document.getElementById(
+    'app'
+  );
+
+
+let identity =
+  null;
+
+
+let sessionId =
+  '';
+
+
+let completedCases =
+  new Set();
+
+
+let currentCase =
+  null;
+
+
+let state =
+  null;
+
+
+let actionHistory =
+  [];
+
+
+let eventCounter =
+  0;
+
+
+let undoStack =
+  [];
+
+
+let undoCount =
+  0;
+
+
+let actionCount =
+  0;
+
+
+let caseStartTime =
+  0;
+
+
+let lastApp =
+  'ticket';
+
+
+let lastMessage =
+  '';
+
+
+let securityIncidentEver =
+  false;
+
+
+let securityIncidentCount =
+  0;
+
+
+/*
+  Submission retry 用。
+*/
+let pendingSubmissionPayload =
+  null;
+
+
+let submissionInFlight =
+  false;
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
 
 function showLogin() {
+
   app.innerHTML = `
+
     <div class="login-page">
+
       <div class="login-card">
-        <h1>校園 IT 管理員模擬器</h1>
-        <p class="muted">你可以和組員討論，但每位同學必須在自己的裝置操作及提交。</p>
+
+        <h1>
+          校園 IT 管理員模擬器
+        </h1>
+
+
+        <p class="muted">
+
+          你可以和組員討論，
+          但每位同學必須在自己的裝置
+          操作及提交。
+
+        </p>
+
 
         <form id="loginForm">
-          <div class="field"><label>課堂代碼</label><input id="lessonCode" placeholder="例如：S3ICT6" required></div>
-          <div class="field"><label>班別</label><input id="className" placeholder="例如：3A" required></div>
-          <div class="field"><label>學號</label><input id="studentNo" placeholder="例如：12" required></div>
-          <div class="field"><label>小組</label><input id="groupNo" placeholder="例如：3" required></div>
 
-          <button type="submit" class="btn btn-primary">開始值勤</button>
-          <div id="loginError"></div>
+
+          <div class="field">
+
+            <label>
+              課堂代碼
+            </label>
+
+            <input
+              id="lessonCode"
+              placeholder="例如：S3ICT6"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              班別
+            </label>
+
+            <input
+              id="className"
+              placeholder="例如：3A"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              學號
+            </label>
+
+            <input
+              id="studentNo"
+              placeholder="例如：12"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              小組
+            </label>
+
+            <input
+              id="groupNo"
+              placeholder="例如：3"
+              required
+            >
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+
+            開始值勤
+
+          </button>
+
+
+          <div id="loginError">
+          </div>
+
+
         </form>
+
       </div>
+
     </div>
+
   `;
 
-  document.getElementById('loginForm').addEventListener('submit', login);
+
+  document
+    .getElementById(
+      'loginForm'
+    )
+    .addEventListener(
+      'submit',
+      login
+    );
+
 }
+
 
 function login(event) {
+
   event.preventDefault();
 
+
   identity = {
-    lesson_code: document.getElementById('lessonCode').value.trim(),
-    class_name: document.getElementById('className').value.trim(),
-    student_no: document.getElementById('studentNo').value.trim(),
-    group_no: document.getElementById('groupNo').value.trim()
+
+    lesson_code:
+
+      document
+        .getElementById(
+          'lessonCode'
+        )
+        .value
+        .trim(),
+
+    class_name:
+
+      document
+        .getElementById(
+          'className'
+        )
+        .value
+        .trim(),
+
+    student_no:
+
+      document
+        .getElementById(
+          'studentNo'
+        )
+        .value
+        .trim(),
+
+    group_no:
+
+      document
+        .getElementById(
+          'groupNo'
+        )
+        .value
+        .trim()
+
   };
 
-  if (!identity.lesson_code || !identity.class_name || !identity.student_no || !identity.group_no) {
-    document.getElementById('loginError').innerHTML = `
-      <div class="result danger-result">請完成所有資料。</div>
-    `;
+
+  if (
+
+    !identity.lesson_code ||
+
+    !identity.class_name ||
+
+    !identity.student_no ||
+
+    !identity.group_no
+
+  ) {
+
+    document
+      .getElementById(
+        'loginError'
+      )
+      .innerHTML = `
+
+        <div class="result danger-result">
+
+          請完成所有資料。
+
+        </div>
+
+      `;
+
     return;
+
   }
 
-  sessionId = [identity.class_name,identity.student_no,Date.now()].join('-');
+
+  sessionId =
+
+    [
+
+      identity.class_name,
+
+      identity.student_no,
+
+      Date.now(),
+
+      Math
+        .random()
+        .toString(36)
+        .slice(
+          2,
+          7
+        )
+
+    ].join('-');
+
 
   app.innerHTML = `
-    <div class="login-page"><div class="login-card">正在載入學生進度……</div></div>
+
+    <div class="login-page">
+
+      <div class="login-card">
+
+        <h2>
+          正在登入 IT 支援中心……
+        </h2>
+
+        <p class="muted">
+
+          同一時間有多位同學使用時，
+          系統會自動錯開連線。
+
+        </p>
+
+        <div id="progressMessage">
+
+          正在讀取你的完成進度……
+
+        </div>
+
+      </div>
+
+    </div>
+
   `;
 
-  google.script.run
-    .withSuccessHandler(result => {
-      completedCases = new Set(result.completedCaseIds || []);
-      logServer('LOGIN','登入模擬器',{});
-      showHub();
-    })
-    .withFailureHandler(showError)
-    .getProgress(identity);
+
+  /*
+    Random jitter：
+    避免全班按 Start 後完全同一毫秒
+    call getProgress()。
+  */
+  loadProgressWithRetry(
+    0
+  );
+
 }
+
+
+/* =========================================================
+   LOGIN RETRY
+========================================================= */
+
+
+function loadProgressWithRetry(
+  attempt
+) {
+
+  const initialDelay =
+
+    attempt === 0
+
+      ? Math.floor(
+          Math.random() *
+          1500
+        )
+
+      : retryDelay(
+          attempt
+        );
+
+
+  const message =
+    document.getElementById(
+      'progressMessage'
+    );
+
+
+  if (message) {
+
+    message.innerHTML =
+
+      attempt === 0
+
+        ? '正在讀取你的完成進度……'
+
+        : `伺服器繁忙，正在自動重試（${attempt + 1}/${MAX_PROGRESS_ATTEMPTS}）……`;
+
+  }
+
+
+  setTimeout(
+
+    () => {
+
+
+      google.script.run
+
+        .withSuccessHandler(
+
+          result => {
+
+
+            completedCases =
+              new Set(
+                result.completedCaseIds ||
+                []
+              );
+
+
+            showHub();
+
+          }
+
+        )
+
+        .withFailureHandler(
+
+          error => {
+
+
+            if (
+
+              attempt + 1 <
+                MAX_PROGRESS_ATTEMPTS
+
+            ) {
+
+              loadProgressWithRetry(
+                attempt + 1
+              );
+
+              return;
+
+            }
+
+
+            showProgressLoadFailure(
+              error
+            );
+
+          }
+
+        )
+
+        .getProgress(
+          identity
+        );
+
+
+    },
+
+    initialDelay
+
+  );
+
+}
+
+
+/* =========================================================
+   PROGRESS LOAD FAILURE
+========================================================= */
+
+
+function showProgressLoadFailure(
+  error
+) {
+
+  app.innerHTML = `
+
+    <div class="login-page">
+
+      <div class="login-card">
+
+        <h2>
+          暫時未能讀取舊進度
+        </h2>
+
+
+        <div class="result warning-result">
+
+          ${escapeHtml(
+            errorText(
+              error
+            )
+          )}
+
+        </div>
+
+
+        <p>
+
+          你可以再試一次，
+          或直接進入模擬器。
+
+        </p>
+
+
+        <div class="action-buttons">
+
+
+          <button
+            id="retryProgressBtn"
+            class="btn btn-primary"
+          >
+
+            再試一次
+
+          </button>
+
+
+          <button
+            id="skipProgressBtn"
+            class="btn"
+          >
+
+            直接開始今堂活動
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById(
+      'retryProgressBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () => {
+
+        app.innerHTML = `
+
+          <div class="login-page">
+
+            <div class="login-card">
+
+              正在重新讀取進度……
+
+              <div id="progressMessage">
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        loadProgressWithRetry(
+          0
+        );
+
+      }
+
+    );
+
+
+  document
+    .getElementById(
+      'skipProgressBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () => {
+
+        completedCases =
+          new Set();
+
+        showHub();
+
+      }
+
+    );
+
+}
+
+
+/* =========================================================
+   HUB
+========================================================= */
+
 
 function showHub() {
+
   removeSecurityAlert();
 
-  const cases = Object.values(CASES);
-  const cards = cases.map((c,index) => {
-    const done = completedCases.has(c.id);
-    return `
-      <div class="case-card">
-        <div class="muted">CASE ${index + 1}</div>
-        <h3>${escapeHtml(c.title)}</h3>
-        <p class="muted">${escapeHtml(c.subtitle)}</p>
-        ${
-          done
-            ? `<div class="done">✓ 已提交</div>`
-            : `<button class="btn btn-primary start-case" data-case="${c.id}">進入電腦</button>`
+
+  const cases =
+    Object.values(
+      CASES
+    );
+
+
+  const cards =
+    cases
+
+      .map(
+
+        (c, index) => {
+
+
+          const done =
+            completedCases.has(
+              c.id
+            );
+
+
+          return `
+
+            <div class="case-card">
+
+
+              <div class="muted">
+
+                CASE ${index + 1}
+
+              </div>
+
+
+              <h3>
+
+                ${escapeHtml(
+                  c.title
+                )}
+
+              </h3>
+
+
+              <p class="muted">
+
+                ${escapeHtml(
+                  c.subtitle
+                )}
+
+              </p>
+
+
+              ${
+                done
+
+                  ? `
+
+                    <div class="done">
+
+                      ✓ 已提交
+
+                    </div>
+
+                  `
+
+                  : `
+
+                    <button
+                      class="btn btn-primary start-case"
+                      data-case="${c.id}"
+                    >
+
+                      進入電腦
+
+                    </button>
+
+                  `
+              }
+
+
+            </div>
+
+          `;
+
         }
-      </div>
-    `;
-  }).join('');
+
+      )
+
+      .join('');
+
 
   app.innerHTML = `
+
     <div class="hub">
+
+
       <div class="hub-header">
-        <h1>IT 支援中心</h1>
-        <p>${escapeHtml(identity.class_name)} · 學號 ${escapeHtml(identity.student_no)} · 第 ${escapeHtml(identity.group_no)} 組</p>
-        <p class="muted">可以討論，但每位同學必須自己操作及提交。</p>
+
+        <h1>
+          IT 支援中心
+        </h1>
+
+
+        <p>
+
+          ${escapeHtml(
+            identity.class_name
+          )}
+
+          · 學號
+
+          ${escapeHtml(
+            identity.student_no
+          )}
+
+          · 第
+
+          ${escapeHtml(
+            identity.group_no
+          )}
+
+          組
+
+        </p>
+
+
+        <p class="muted">
+
+          可以討論，
+          但每位同學必須自己操作及提交。
+
+        </p>
+
       </div>
-      <div class="case-grid">${cards}</div>
+
+
+      <div class="case-grid">
+
+        ${cards}
+
+      </div>
+
+
     </div>
+
   `;
 
-  document.querySelectorAll('.start-case').forEach(button => {
-    button.addEventListener('click',() => startCase(button.dataset.case));
-  });
+
+  document
+    .querySelectorAll(
+      '.start-case'
+    )
+    .forEach(
+
+      button => {
+
+        button.addEventListener(
+
+          'click',
+
+          () =>
+            startCase(
+              button.dataset.case
+            )
+
+        );
+
+      }
+
+    );
+
 }
 
-function startCase(caseId) {
-  currentCase = CASES[caseId];
-  state = deepClone(currentCase.initialState);
 
-  actionHistory = [];
-  undoStack = [];
-  undoCount = 0;
-  actionCount = 0;
-  securityIncidentEver = false;
-  securityIncidentCount = 0;
+/* =========================================================
+   START CASE
+========================================================= */
 
-  caseStartTime = Date.now();
-  lastApp = 'ticket';
-  lastMessage = '';
 
-  recordAction('開始個案',false);
+function startCase(
+  caseId
+) {
+
+  currentCase =
+    CASES[
+      caseId
+    ];
+
+
+  state =
+    deepClone(
+      currentCase.initialState
+    );
+
+
+  actionHistory =
+    [];
+
+
+  eventCounter =
+    0;
+
+
+  undoStack =
+    [];
+
+
+  undoCount =
+    0;
+
+
+  actionCount =
+    0;
+
+
+  securityIncidentEver =
+    false;
+
+
+  securityIncidentCount =
+    0;
+
+
+  pendingSubmissionPayload =
+    null;
+
+
+  submissionInFlight =
+    false;
+
+
+  caseStartTime =
+    Date.now();
+
+
+  lastApp =
+    'ticket';
+
+
+  lastMessage =
+    '';
+
+
+  recordEvent(
+
+    'CASE_START',
+
+    currentCase.title,
+
+    currentCase.id,
+
+    {}
+
+  );
+
+
   showDesktop();
+
 }
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
 
 function showDesktop() {
+
   app.innerHTML = `
-    <div class="desktop">
+
+    <div
+      class="
+        desktop
+        ${
+          !state.firewallOn
+            ? 'security-mode'
+            : ''
+        }
+      "
+    >
+
+
       <div class="desktop-top">
+
+
         <div>
-          <div class="case-name">${escapeHtml(currentCase.title)}</div>
-          <div class="muted">${escapeHtml(currentCase.subtitle)}</div>
+
+          <div class="case-name">
+
+            ${escapeHtml(
+              currentCase.title
+            )}
+
+          </div>
+
+
+          <div class="muted">
+
+            ${escapeHtml(
+              currentCase.subtitle
+            )}
+
+          </div>
+
         </div>
+
 
         <div class="system-summary">
-          <span class="mini-stat">CPU <span class="${state.cpu > 80 ? 'bad' : 'good'}">${state.cpu}%</span></span>
-          <span class="mini-stat">記憶體 ${state.memory}%</span>
-          <span class="mini-stat">可用空間 ${state.freeDisk} GB</span>
-          <span class="mini-stat">防火牆 <span class="${state.firewallOn ? 'good' : 'bad'}">${state.firewallOn ? '開啟' : '關閉'}</span></span>
-          <span class="mini-stat">安全水平 <span class="${state.securityScore >= 80 ? 'good' : state.securityScore >= 50 ? 'warning' : 'bad'}">${state.securityScore}%</span></span>
+
+
+          <span class="mini-stat">
+
+            CPU
+
+            <span
+              class="${
+                state.cpu > 80
+                  ? 'bad'
+                  : 'good'
+              }"
+            >
+
+              ${state.cpu}%
+
+            </span>
+
+          </span>
+
+
+          <span class="mini-stat">
+
+            記憶體
+            ${state.memory}%
+
+          </span>
+
+
+          <span class="mini-stat">
+
+            可用空間
+            ${state.freeDisk} GB
+
+          </span>
+
+
+          <span class="mini-stat">
+
+            防火牆
+
+            <span
+              class="${
+                state.firewallOn
+                  ? 'good'
+                  : 'bad'
+              }"
+            >
+
+              ${
+                state.firewallOn
+                  ? '開啟'
+                  : '關閉'
+              }
+
+            </span>
+
+          </span>
+
+
+          <span class="mini-stat">
+
+            安全水平
+
+            <span
+              class="${
+                state.securityScore >= 80
+
+                  ? 'good'
+
+                  : state.securityScore >= 50
+
+                    ? 'warning'
+
+                    : 'bad'
+              }"
+            >
+
+              ${state.securityScore}%
+
+            </span>
+
+          </span>
+
+
         </div>
+
+
       </div>
+
 
       <div class="desktop-main">
+
+
         <div class="desktop-icons">
-          ${appIcon('ticket','📨','IT 支援中心')}
-          ${appIcon('task','📊','工作管理員','Task Manager')}
-          ${appIcon('cleanup','🧹','磁碟清理','Disk Cleanup')}
-          ${appIcon('antivirus','🛡️','抗電腦病毒軟件','Antivirus')}
-          ${appIcon('device','🖨️','裝置管理員')}
-          ${appIcon('firewall','🔥','防火牆','Firewall')}
+
+
+          ${appIcon(
+            'ticket',
+            '📨',
+            'IT 支援中心'
+          )}
+
+
+          ${appIcon(
+            'task',
+            '📊',
+            '工作管理員',
+            'Task Manager'
+          )}
+
+
+          ${appIcon(
+            'cleanup',
+            '🧹',
+            '磁碟清理',
+            'Disk Cleanup'
+          )}
+
+
+          ${appIcon(
+            'antivirus',
+            '🛡️',
+            '抗電腦病毒軟件',
+            'Antivirus'
+          )}
+
+
+          ${appIcon(
+            'device',
+            '🖨️',
+            '裝置管理員'
+          )}
+
+
+          ${appIcon(
+            'firewall',
+            '🔥',
+            '防火牆',
+            'Firewall'
+          )}
+
+
         </div>
+
 
         <div class="window-area">
+
+
           <div class="window">
-            <div class="window-titlebar"><span id="windowTitle"></span><span>— □ ×</span></div>
-            <div id="windowContent" class="window-content"></div>
+
+
+            <div class="window-titlebar">
+
+              <span id="windowTitle">
+              </span>
+
+              <span>
+                — □ ×
+              </span>
+
+            </div>
+
+
+            <div
+              id="windowContent"
+              class="window-content"
+            >
+            </div>
+
+
           </div>
+
+
         </div>
+
+
       </div>
+
 
       <div class="taskbar">
-        <button id="hubBtn" class="btn" ${!state.firewallOn ? 'disabled' : ''}>⊞ 個案列表</button>
-        <button id="undoBtn" class="btn" ${undoStack.length === 0 || !state.firewallOn ? 'disabled' : ''}>↶ 復原上一個操作</button>
-        <span>操作：${actionCount}</span>
-        <span>復原：${undoCount}</span>
-        <span class="taskbar-spacer"></span>
-        <span>個人操作 · 可以小組討論</span>
+
+
+        <button
+          id="hubBtn"
+          class="btn"
+          ${
+            !state.firewallOn
+              ? 'disabled'
+              : ''
+          }
+        >
+
+          ⊞ 個案列表
+
+        </button>
+
+
+        <button
+          id="undoBtn"
+          class="btn"
+          ${
+            undoStack.length === 0 ||
+            !state.firewallOn
+
+              ? 'disabled'
+
+              : ''
+          }
+        >
+
+          ↶ 復原上一個操作
+
+        </button>
+
+
+        <span>
+
+          操作：
+          ${actionCount}
+
+        </span>
+
+
+        <span>
+
+          復原：
+          ${undoCount}
+
+        </span>
+
+
+        <span class="taskbar-spacer">
+        </span>
+
+
+        <span>
+
+          個人操作 · 可以小組討論
+
+        </span>
+
+
       </div>
+
+
     </div>
+
   `;
 
-  document.querySelectorAll('.app-icon').forEach(button => {
-    button.addEventListener('click',() => openApp(button.dataset.app));
-  });
 
-  document.getElementById('undoBtn').addEventListener('click',undoLastAction);
-  document.getElementById('hubBtn').addEventListener('click',confirmLeaveCase);
+  document
+    .querySelectorAll(
+      '.app-icon'
+    )
+    .forEach(
+
+      button => {
+
+        button.addEventListener(
+
+          'click',
+
+          () => {
+
+            openApp(
+              button.dataset.app
+            );
+
+          }
+
+        );
+
+      }
+
+    );
+
+
+  document
+    .getElementById(
+      'undoBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      undoLastAction
+
+    );
+
+
+  document
+    .getElementById(
+      'hubBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      confirmLeaveCase
+
+    );
+
 
   renderCurrentApp();
 
-  if (!state.firewallOn) showSecurityAlert();
-  else removeSecurityAlert();
+
+  if (
+    !state.firewallOn
+  ) {
+
+    showSecurityAlert();
+
+  }
+
+  else {
+
+    removeSecurityAlert();
+
+  }
+
 }
 
-function appIcon(id,symbol,name,english = '') {
+
+/* =========================================================
+   APP ICON
+========================================================= */
+
+
+function appIcon(
+  id,
+  symbol,
+  name,
+  english = ''
+) {
+
   return `
-    <button class="app-icon" data-app="${id}">
-      <span class="app-icon-symbol">${symbol}</span>
+
+    <button
+      class="app-icon"
+      data-app="${id}"
+    >
+
+      <span class="app-icon-symbol">
+
+        ${symbol}
+
+      </span>
+
       ${name}
-      ${english ? `<br>（${english}）` : ''}
+
+      ${
+        english
+
+          ? `<br>（${english}）`
+
+          : ''
+      }
+
     </button>
+
   `;
+
 }
 
-function openApp(appId) {
-  lastApp = appId;
-  recordPassive('開啟應用程式',appId);
+
+/* =========================================================
+   OPEN APP
+========================================================= */
+
+
+function openApp(
+  appId
+) {
+
+  lastApp =
+    appId;
+
+
+  /*
+    只寫入 local actionHistory。
+    完全沒有 google.script.run。
+  */
+  recordEvent(
+
+    'OPEN_APP',
+
+    APP_LABELS[
+      appId
+    ] || appId,
+
+    appId,
+
+    {}
+
+  );
+
+
   renderCurrentApp();
+
 }
+
 
 function renderCurrentApp() {
-  switch (lastApp) {
-    case 'ticket': renderTicket(); break;
-    case 'task': renderTaskManager(); break;
-    case 'cleanup': renderCleanup(); break;
-    case 'antivirus': renderAntivirus(); break;
-    case 'device': renderDeviceManager(); break;
-    case 'firewall': renderFirewall(); break;
-    default: renderTicket();
+
+  switch (
+    lastApp
+  ) {
+
+    case 'ticket':
+
+      renderTicket();
+
+      break;
+
+
+    case 'task':
+
+      renderTaskManager();
+
+      break;
+
+
+    case 'cleanup':
+
+      renderCleanup();
+
+      break;
+
+
+    case 'antivirus':
+
+      renderAntivirus();
+
+      break;
+
+
+    case 'device':
+
+      renderDeviceManager();
+
+      break;
+
+
+    case 'firewall':
+
+      renderFirewall();
+
+      break;
+
+
+    default:
+
+      renderTicket();
+
   }
+
 }
+
+
+/* =========================================================
+   IT SUPPORT
+========================================================= */
+
 
 function renderTicket() {
-  setWindow('IT 支援中心',`
-    <div class="ticket">
-      <strong>${escapeHtml(currentCase.title)}</strong>
-      <p>${escapeHtml(currentCase.ticket)}</p>
-    </div>
 
-    <h3>已知資料</h3>
-    <ul>${currentCase.facts.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+  setWindow(
 
-    <div class="result">
-      <strong>你的任務：</strong><br><br>
-      在桌面開啟不同工具，找出證據並修復問題。<br><br>
-      你可以嘗試不同方法，但部分操作可能產生<strong>真正的模擬後果</strong>。
-    </div>
+    'IT 支援中心',
 
-    ${messageBlock()}
-  `);
+    `
+
+      <div class="ticket">
+
+
+        <strong>
+
+          ${escapeHtml(
+            currentCase.title
+          )}
+
+        </strong>
+
+
+        <p>
+
+          ${escapeHtml(
+            currentCase.ticket
+          )}
+
+        </p>
+
+
+      </div>
+
+
+      <h3>
+        已知資料
+      </h3>
+
+
+      <ul>
+
+        ${
+          currentCase.facts
+
+            .map(
+
+              item => `
+
+                <li>
+
+                  ${escapeHtml(
+                    item
+                  )}
+
+                </li>
+
+              `
+
+            )
+
+            .join('')
+        }
+
+      </ul>
+
+
+      <div class="result">
+
+        <strong>
+          你的任務：
+        </strong>
+
+        <br><br>
+
+        在桌面開啟不同工具，
+        找出證據並修復問題。
+
+        <br><br>
+
+        你可以嘗試不同方法，
+        但部分操作可能產生
+        <strong>
+          真正的模擬後果
+        </strong>。
+
+      </div>
+
+
+      ${messageBlock()}
+
+
+    `
+
+  );
+
 }
+
+
+/* =========================================================
+   TASK MANAGER
+========================================================= */
+
 
 function renderTaskManager() {
+
   let rows = `
-    <tr><td>PowerPoint</td><td>4%</td><td>執行中</td></tr>
-    <tr><td>Browser</td><td>2%</td><td>執行中</td></tr>
+
+    <tr>
+
+      <td>
+        PowerPoint
+      </td>
+
+      <td>
+        4%
+      </td>
+
+      <td>
+        執行中
+      </td>
+
+    </tr>
+
+
+    <tr>
+
+      <td>
+        Browser
+      </td>
+
+      <td>
+        2%
+      </td>
+
+      <td>
+        執行中
+      </td>
+
+    </tr>
+
   `;
 
-  if (currentCase.id === 'CASE02_CPU') {
+
+  if (
+
+    currentCase.id ===
+      'CASE02_CPU'
+
+  ) {
+
     rows += `
-      <tr class="${state.culpritRunning ? 'highlight-row' : ''}">
-        <td><strong>VideoRender.exe</strong></td>
-        <td><strong>${state.culpritRunning ? '91%' : '0%'}</strong></td>
-        <td>${state.culpritRunning ? '執行中' : '已結束'}</td>
+
+      <tr
+        class="${
+          state.culpritRunning
+            ? 'highlight-row'
+            : ''
+        }"
+      >
+
+
+        <td>
+
+          <strong>
+            VideoRender.exe
+          </strong>
+
+        </td>
+
+
+        <td>
+
+          <strong>
+
+            ${
+              state.culpritRunning
+                ? '91%'
+                : '0%'
+            }
+
+          </strong>
+
+        </td>
+
+
+        <td>
+
+          ${
+            state.culpritRunning
+
+              ? '執行中'
+
+              : '已結束'
+          }
+
+        </td>
+
+
       </tr>
+
     `;
+
   }
 
-  rows += `<tr><td>System</td><td>1%</td><td>執行中</td></tr>`;
 
-  setWindow('工作管理員（Task Manager）',`
-    <div class="status-grid">
-      ${statusCard('CPU 使用率',state.cpu + '%',state.cpu > 80 ? 'bad' : 'good',state.cpu)}
-      ${statusCard('記憶體使用率',state.memory + '%','',state.memory)}
-      ${statusCard('可用儲存空間',state.freeDisk + ' GB','',null)}
-    </div>
+  rows += `
 
-    <table>
-      <thead><tr><th>程式</th><th>CPU</th><th>狀態</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
+    <tr>
 
-    <div class="action-buttons">
-      ${
-        currentCase.id === 'CASE02_CPU'
-          ? `<button id="endTaskBtn" class="btn btn-primary" ${!state.culpritRunning ? 'disabled' : ''}>結束 VideoRender.exe</button>`
-          : `<button class="btn" disabled>沒有異常 CPU 程式需要處理</button>`
-      }
-    </div>
+      <td>
+        System
+      </td>
 
-    ${messageBlock()}
-  `);
+      <td>
+        1%
+      </td>
 
-  const btn = document.getElementById('endTaskBtn');
+      <td>
+        執行中
+      </td>
+
+    </tr>
+
+  `;
+
+
+  setWindow(
+
+    '工作管理員（Task Manager）',
+
+    `
+
+      <div class="status-grid">
+
+
+        ${statusCard(
+
+          'CPU 使用率',
+
+          state.cpu +
+            '%',
+
+          state.cpu > 80
+            ? 'bad'
+            : 'good',
+
+          state.cpu
+
+        )}
+
+
+        ${statusCard(
+
+          '記憶體使用率',
+
+          state.memory +
+            '%',
+
+          '',
+
+          state.memory
+
+        )}
+
+
+        ${statusCard(
+
+          '可用儲存空間',
+
+          state.freeDisk +
+            ' GB',
+
+          '',
+
+          null
+
+        )}
+
+
+      </div>
+
+
+      <table>
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              程式
+            </th>
+
+            <th>
+              CPU
+            </th>
+
+            <th>
+              狀態
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          ${rows}
+
+        </tbody>
+
+
+      </table>
+
+
+      <div class="action-buttons">
+
+
+        ${
+          currentCase.id ===
+            'CASE02_CPU'
+
+            ? `
+
+              <button
+                id="endTaskBtn"
+                class="btn btn-primary"
+                ${
+                  !state.culpritRunning
+                    ? 'disabled'
+                    : ''
+                }
+              >
+
+                結束 VideoRender.exe
+
+              </button>
+
+            `
+
+            : `
+
+              <button
+                class="btn"
+                disabled
+              >
+
+                沒有異常 CPU 程式需要處理
+
+              </button>
+
+            `
+        }
+
+
+      </div>
+
+
+      ${messageBlock()}
+
+
+    `
+
+  );
+
+
+  const btn =
+    document.getElementById(
+      'endTaskBtn'
+    );
+
+
   if (btn) {
-    btn.addEventListener('click',() => {
-      performAction('結束 VideoRender.exe',() => {
-        state.culpritRunning = false;
-        state.cpu = 24;
-        lastMessage = 'VideoRender.exe 已結束。CPU 使用率由 97% 降至 24%。';
-      });
-    });
+
+    btn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '結束 VideoRender.exe',
+
+          () => {
+
+            state.culpritRunning =
+              false;
+
+
+            state.cpu =
+              24;
+
+
+            lastMessage =
+              'VideoRender.exe 已結束。CPU 使用率由 97% 降至 24%。';
+
+          }
+
+        );
+
+      }
+
+    );
+
   }
+
 }
+
+
+/* =========================================================
+   DISK CLEANUP
+========================================================= */
+
 
 function renderCleanup() {
+
   const available =
-    currentCase.id === 'CASE03_STORAGE'
-      ? state.tempFiles || 0
-      : state.cleanupPerformed ? 0 : 5;
 
-  setWindow('磁碟清理（Disk Cleanup）',`
-    <h3>可以清理的檔案</h3>
+    currentCase.id ===
+      'CASE03_STORAGE'
 
-    <table>
-      <tr><th>項目</th><th>大小</th></tr>
-      <tr><td>暫存檔案及快取</td><td>${available} GB</td></tr>
-    </table>
+      ? state.tempFiles ||
+        0
 
-    <p>可用儲存空間：<strong>${state.freeDisk} GB</strong></p>
+      : state.cleanupPerformed
 
-    <div class="action-buttons">
-      <button id="cleanBtn" class="btn btn-primary" ${available <= 0 ? 'disabled' : ''}>執行磁碟清理</button>
-    </div>
+        ? 0
 
-    ${messageBlock()}
-  `);
+        : 5;
 
-  const btn = document.getElementById('cleanBtn');
+
+  setWindow(
+
+    '磁碟清理（Disk Cleanup）',
+
+    `
+
+      <h3>
+        可以清理的檔案
+      </h3>
+
+
+      <table>
+
+        <tr>
+
+          <th>
+            項目
+          </th>
+
+          <th>
+            大小
+          </th>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            暫存檔案及快取
+          </td>
+
+          <td>
+            ${available} GB
+          </td>
+
+        </tr>
+
+      </table>
+
+
+      <p>
+
+        可用儲存空間：
+
+        <strong>
+
+          ${state.freeDisk} GB
+
+        </strong>
+
+      </p>
+
+
+      <div class="action-buttons">
+
+        <button
+          id="cleanBtn"
+          class="btn btn-primary"
+          ${
+            available <= 0
+              ? 'disabled'
+              : ''
+          }
+        >
+
+          執行磁碟清理
+
+        </button>
+
+      </div>
+
+
+      ${messageBlock()}
+
+
+    `
+
+  );
+
+
+  const btn =
+    document.getElementById(
+      'cleanBtn'
+    );
+
+
   if (btn) {
-    btn.addEventListener('click',() => {
-      performAction('執行磁碟清理',() => {
-        if (currentCase.id === 'CASE03_STORAGE') {
-          const amount = state.tempFiles || 0;
-          state.freeDisk += amount;
-          state.tempFiles = 0;
-          state.cleanupPerformed = true;
-          lastMessage = `已清理 ${amount} GB 暫存檔案。現在可用空間為 ${state.freeDisk} GB。`;
-        } else {
-          state.freeDisk += 5;
-          state.cleanupPerformed = true;
-          lastMessage = '磁碟清理釋放了 5 GB 空間，但目前主要問題仍未得到解決。';
-        }
-      });
-    });
+
+    btn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '執行磁碟清理',
+
+          () => {
+
+
+            if (
+
+              currentCase.id ===
+                'CASE03_STORAGE'
+
+            ) {
+
+              const amount =
+                state.tempFiles ||
+                0;
+
+
+              state.freeDisk +=
+                amount;
+
+
+              state.tempFiles =
+                0;
+
+
+              state.cleanupPerformed =
+                true;
+
+
+              lastMessage =
+
+                `已清理 ${amount} GB 暫存檔案。現在可用空間為 ${state.freeDisk} GB。`;
+
+            }
+
+
+            else {
+
+              state.freeDisk +=
+                5;
+
+
+              state.cleanupPerformed =
+                true;
+
+
+              lastMessage =
+                '磁碟清理釋放了 5 GB 空間，但目前主要問題仍未得到解決。';
+
+            }
+
+          }
+
+        );
+
+      }
+
+    );
+
   }
+
 }
+
+
+/* =========================================================
+   ANTIVIRUS
+========================================================= */
+
 
 function renderAntivirus() {
-  let scanResult = '尚未執行掃描';
 
-  if (state.virusScanned) {
-    scanResult = state.malware > 0
-      ? `發現 ${state.malware} 個可疑／惡意項目`
-      : '沒有發現已知威脅';
+  let scanResult =
+    '尚未執行掃描';
+
+
+  if (
+    state.virusScanned
+  ) {
+
+    scanResult =
+
+      state.malware > 0
+
+        ? `發現 ${state.malware} 個可疑／惡意項目`
+
+        : '沒有發現已知威脅';
+
   }
 
-  setWindow('抗電腦病毒軟件（Antivirus Software）',`
-    <h3>安全掃描</h3>
 
-    <div class="status-card">
-      <div class="status-label">掃描狀態</div>
-      <div class="status-value ${state.virusScanned && state.malware > 0 ? 'bad' : 'good'}">${scanResult}</div>
-    </div>
+  setWindow(
 
-    <div class="action-buttons">
-      <button id="scanBtn" class="btn btn-primary">執行病毒掃描</button>
-      ${
-        state.virusScanned && state.malware > 0
-          ? `<button id="quarantineBtn" class="btn btn-danger">隔離／移除惡意項目</button>`
-          : ''
+    '抗電腦病毒軟件（Antivirus Software）',
+
+    `
+
+      <h3>
+        安全掃描
+      </h3>
+
+
+      <div class="status-card">
+
+
+        <div class="status-label">
+
+          掃描狀態
+
+        </div>
+
+
+        <div
+          class="status-value ${
+            state.virusScanned &&
+            state.malware > 0
+
+              ? 'bad'
+
+              : 'good'
+          }"
+        >
+
+          ${scanResult}
+
+        </div>
+
+
+      </div>
+
+
+      <div class="action-buttons">
+
+
+        <button
+          id="scanBtn"
+          class="btn btn-primary"
+        >
+
+          執行病毒掃描
+
+        </button>
+
+
+        ${
+          state.virusScanned &&
+          state.malware > 0
+
+            ? `
+
+              <button
+                id="quarantineBtn"
+                class="btn btn-danger"
+              >
+
+                隔離／移除惡意項目
+
+              </button>
+
+            `
+
+            : ''
+        }
+
+
+      </div>
+
+
+      ${messageBlock()}
+
+
+    `
+
+  );
+
+
+  document
+    .getElementById(
+      'scanBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '執行病毒掃描',
+
+          () => {
+
+
+            state.virusScanned =
+              true;
+
+
+            lastMessage =
+
+              state.malware > 0
+
+                ? `掃描發現 ${state.malware} 個可疑／惡意項目。`
+
+                : '掃描完成，沒有發現已知威脅。';
+
+          }
+
+        );
+
       }
-    </div>
 
-    ${messageBlock()}
-  `);
+    );
 
-  document.getElementById('scanBtn').addEventListener('click',() => {
-    performAction('執行病毒掃描',() => {
-      state.virusScanned = true;
-      lastMessage = state.malware > 0
-        ? `掃描發現 ${state.malware} 個可疑／惡意項目。`
-        : '掃描完成，沒有發現已知威脅。';
-    });
-  });
 
-  const quarantineBtn = document.getElementById('quarantineBtn');
-  if (quarantineBtn) {
-    quarantineBtn.addEventListener('click',() => {
-      performAction('隔離／移除惡意項目',() => {
-        state.malware = 0;
-        lastMessage = '惡意項目已被隔離／移除，異常廣告停止出現。';
-      });
-    });
+  const quarantineBtn =
+    document.getElementById(
+      'quarantineBtn'
+    );
+
+
+  if (
+    quarantineBtn
+  ) {
+
+    quarantineBtn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '隔離／移除惡意項目',
+
+          () => {
+
+
+            state.malware =
+              0;
+
+
+            lastMessage =
+              '惡意項目已被隔離／移除，異常廣告停止出現。';
+
+          }
+
+        );
+
+      }
+
+    );
+
   }
+
 }
+
+
+/* =========================================================
+   DEVICE MANAGER
+========================================================= */
+
 
 function renderDeviceManager() {
-  let printerStatus = '正常';
 
-  if (currentCase.id === 'CASE01_DRIVER' && state.driverWarning) {
-    printerStatus = '⚠ 驅動程式兼容性警告';
+  let printerStatus =
+    '正常';
+
+
+  if (
+
+    currentCase.id ===
+      'CASE01_DRIVER' &&
+
+    state.driverWarning
+
+  ) {
+
+    printerStatus =
+      '⚠ 驅動程式兼容性警告';
+
   }
 
-  if (currentCase.id === 'CASE01_DRIVER' && state.printerWorking) {
-    printerStatus = '正常';
+
+  if (
+
+    currentCase.id ===
+      'CASE01_DRIVER' &&
+
+    state.printerWorking
+
+  ) {
+
+    printerStatus =
+      '正常';
+
   }
 
-  setWindow('裝置管理員',`
-    <table>
-      <tr><th>裝置</th><th>狀態</th></tr>
-      <tr><td>顯示卡</td><td class="good">正常</td></tr>
-      <tr><td>網絡介面卡</td><td class="good">正常</td></tr>
-      <tr class="${state.driverWarning ? 'highlight-row' : ''}"><td>打印機</td><td>${printerStatus}</td></tr>
-    </table>
 
-    <div class="action-buttons">
-      <button id="checkDriverBtn" class="btn">檢查打印機驅動程式</button>
-      ${
-        currentCase.id === 'CASE01_DRIVER' && state.driverChecked && !state.printerWorking
-          ? `<button id="updateDriverBtn" class="btn btn-primary">更新兼容驅動程式</button>`
-          : ''
+  setWindow(
+
+    '裝置管理員',
+
+    `
+
+      <table>
+
+
+        <tr>
+
+          <th>
+            裝置
+          </th>
+
+          <th>
+            狀態
+          </th>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            顯示卡
+          </td>
+
+          <td class="good">
+            正常
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            網絡介面卡
+          </td>
+
+          <td class="good">
+            正常
+          </td>
+
+        </tr>
+
+
+        <tr
+          class="${
+            state.driverWarning
+
+              ? 'highlight-row'
+
+              : ''
+          }"
+        >
+
+          <td>
+            打印機
+          </td>
+
+          <td>
+            ${printerStatus}
+          </td>
+
+        </tr>
+
+
+      </table>
+
+
+      <div class="action-buttons">
+
+
+        <button
+          id="checkDriverBtn"
+          class="btn"
+        >
+
+          檢查打印機驅動程式
+
+        </button>
+
+
+        ${
+          currentCase.id ===
+            'CASE01_DRIVER' &&
+
+          state.driverChecked &&
+
+          !state.printerWorking
+
+            ? `
+
+              <button
+                id="updateDriverBtn"
+                class="btn btn-primary"
+              >
+
+                更新兼容驅動程式
+
+              </button>
+
+            `
+
+            : ''
+        }
+
+
+      </div>
+
+
+      ${messageBlock()}
+
+
+    `
+
+  );
+
+
+  document
+    .getElementById(
+      'checkDriverBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '檢查打印機驅動程式',
+
+          () => {
+
+
+            state.driverChecked =
+              true;
+
+
+            lastMessage =
+
+              currentCase.id ===
+                'CASE01_DRIVER'
+
+                ? '系統發現：打印機驅動程式與目前的操作系統版本不完全相容。'
+
+                : '沒有發現打印機驅動程式問題。';
+
+          }
+
+        );
+
       }
-    </div>
 
-    ${messageBlock()}
-  `);
+    );
 
-  document.getElementById('checkDriverBtn').addEventListener('click',() => {
-    performAction('檢查打印機驅動程式',() => {
-      state.driverChecked = true;
-      lastMessage = currentCase.id === 'CASE01_DRIVER'
-        ? '系統發現：打印機驅動程式與目前的操作系統版本不完全相容。'
-        : '沒有發現打印機驅動程式問題。';
-    });
-  });
 
-  const updateBtn = document.getElementById('updateDriverBtn');
-  if (updateBtn) {
-    updateBtn.addEventListener('click',() => {
-      performAction('更新打印機驅動程式',() => {
-        state.driverWarning = false;
-        state.printerWorking = true;
-        lastMessage = '兼容驅動程式已安裝。測試頁成功列印。';
-      });
-    });
+  const updateBtn =
+    document.getElementById(
+      'updateDriverBtn'
+    );
+
+
+  if (
+    updateBtn
+  ) {
+
+    updateBtn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '更新打印機驅動程式',
+
+          () => {
+
+
+            state.driverWarning =
+              false;
+
+
+            state.printerWorking =
+              true;
+
+
+            lastMessage =
+              '兼容驅動程式已安裝。測試頁成功列印。';
+
+          }
+
+        );
+
+      }
+
+    );
+
   }
+
 }
+
+
+/* =========================================================
+   FIREWALL
+========================================================= */
+
 
 function renderFirewall() {
-  let ruleResult = '尚未查看近期阻擋紀錄';
 
-  if (state.firewallChecked) {
-    ruleResult = currentCase.id === 'CASE05_FIREWALL'
-      ? '發現：視像會議軟件的連線被安全規則阻擋。'
-      : '沒有發現與目前問題直接相關的阻擋紀錄。';
+  let ruleResult =
+    '尚未查看近期阻擋紀錄';
+
+
+  if (
+    state.firewallChecked
+  ) {
+
+    ruleResult =
+
+      currentCase.id ===
+        'CASE05_FIREWALL'
+
+        ? '發現：視像會議軟件的連線被安全規則阻擋。'
+
+        : '沒有發現與目前問題直接相關的阻擋紀錄。';
+
   }
 
-  setWindow('防火牆（Firewall）',`
-    <div class="status-grid">
-      <div class="status-card">
-        <div class="status-label">防火牆狀態</div>
-        <div class="status-value ${state.firewallOn ? 'good' : 'bad'}">${state.firewallOn ? '開啟' : '關閉'}</div>
+
+  setWindow(
+
+    '防火牆（Firewall）',
+
+    `
+
+      <div class="status-grid">
+
+
+        <div class="status-card">
+
+          <div class="status-label">
+
+            防火牆狀態
+
+          </div>
+
+
+          <div
+            class="status-value ${
+              state.firewallOn
+
+                ? 'good'
+
+                : 'bad'
+            }"
+          >
+
+            ${
+              state.firewallOn
+
+                ? '開啟'
+
+                : '關閉'
+            }
+
+          </div>
+
+        </div>
+
+
+        <div class="status-card">
+
+          <div class="status-label">
+
+            安全水平
+
+          </div>
+
+
+          <div
+            class="status-value ${
+              state.securityScore >= 80
+
+                ? 'good'
+
+                : state.securityScore >= 50
+
+                  ? 'warning'
+
+                  : 'bad'
+            }"
+          >
+
+            ${state.securityScore}%
+
+          </div>
+
+        </div>
+
+
+        <div class="status-card">
+
+          <div class="status-label">
+
+            視像會議
+
+          </div>
+
+
+          <div
+            class="status-value ${
+              state.meetingWorking
+
+                ? 'good'
+
+                : 'bad'
+            }"
+          >
+
+            ${
+              state.meetingWorking
+
+                ? '可以連線'
+
+                : '無法連線'
+            }
+
+          </div>
+
+        </div>
+
+
       </div>
 
-      <div class="status-card">
-        <div class="status-label">安全水平</div>
-        <div class="status-value ${state.securityScore >= 80 ? 'good' : state.securityScore >= 50 ? 'warning' : 'bad'}">${state.securityScore}%</div>
+
+      <div class="result">
+
+        ${ruleResult}
+
       </div>
 
-      <div class="status-card">
-        <div class="status-label">視像會議</div>
-        <div class="status-value ${state.meetingWorking ? 'good' : 'bad'}">${state.meetingWorking ? '可以連線' : '無法連線'}</div>
-      </div>
-    </div>
 
-    <div class="result">${ruleResult}</div>
+      <div class="action-buttons">
 
-    <div class="action-buttons">
-      <button id="checkFirewallBtn" class="btn">查看阻擋紀錄</button>
 
-      ${
-        state.firewallOn
-          ? `<button id="firewallOffBtn" class="btn btn-danger">完全關閉防火牆</button>`
-          : `<button id="firewallOnBtn" class="btn btn-success">🔥 重新開啟防火牆</button>`
-      }
+        <button
+          id="checkFirewallBtn"
+          class="btn"
+        >
 
-      ${
-        currentCase.id === 'CASE05_FIREWALL' &&
-        state.firewallChecked &&
-        state.firewallOn &&
-        !state.meetingWorking
-          ? `<button id="allowMeetingBtn" class="btn btn-primary">只容許所需的視像會議連線</button>`
-          : ''
-      }
-    </div>
+          查看阻擋紀錄
 
-    ${messageBlock()}
-  `);
+        </button>
 
-  document.getElementById('checkFirewallBtn').addEventListener('click',() => {
-    performAction('查看防火牆阻擋紀錄',() => {
-      state.firewallChecked = true;
-      lastMessage = currentCase.id === 'CASE05_FIREWALL'
-        ? '記錄顯示：視像會議軟件的連線被現有安全規則阻擋。'
-        : '沒有發現防火牆與目前問題有直接關係。';
-    });
-  });
 
-  const offBtn = document.getElementById('firewallOffBtn');
-  if (offBtn) {
-    offBtn.addEventListener('click',() => {
-      performAction('完全關閉防火牆',() => {
-        state.firewallOn = false;
-        state.securityScore = 35;
-        securityIncidentEver = true;
-        securityIncidentCount++;
+        ${
+          state.firewallOn
 
-        if (currentCase.id === 'CASE05_FIREWALL') {
-          state.meetingWorking = true;
-          lastMessage = '視像會議現在可以連線，但防火牆已完全關閉。';
-        } else {
-          lastMessage = '防火牆已關閉，但原本的問題沒有因此得到解決。';
+            ? `
+
+              <button
+                id="firewallOffBtn"
+                class="btn btn-danger"
+              >
+
+                完全關閉防火牆
+
+              </button>
+
+            `
+
+            : `
+
+              <button
+                id="firewallOnBtn"
+                class="btn btn-success"
+              >
+
+                🔥 重新開啟防火牆
+
+              </button>
+
+            `
         }
 
-        logServer('SECURITY_INCIDENT','完全關閉防火牆後出現安全警告',{
-          securityScore: state.securityScore,
-          caseId: currentCase.id
-        });
-      });
-    });
-  }
 
-  const onBtn = document.getElementById('firewallOnBtn');
-  if (onBtn) {
-    onBtn.addEventListener('click',() => {
-      performAction('重新開啟防火牆',() => {
-        state.firewallOn = true;
-        state.securityScore = securityIncidentEver ? 80 : 100;
+        ${
+          currentCase.id ===
+            'CASE05_FIREWALL' &&
 
-        if (currentCase.id === 'CASE05_FIREWALL' && state.meetingBlocked) {
-          state.meetingWorking = false;
+          state.firewallChecked &&
+
+          state.firewallOn &&
+
+          !state.meetingWorking
+
+            ? `
+
+              <button
+                id="allowMeetingBtn"
+                class="btn btn-primary"
+              >
+
+                只容許所需的視像會議連線
+
+              </button>
+
+            `
+
+            : ''
         }
 
-        lastMessage = '防火牆已重新開啟。可疑連線再次受到安全規則控制。';
 
-        logServer('SECURITY_RECOVERY','重新開啟防火牆',{
-          securityScore: state.securityScore
-        });
-      });
-    });
+      </div>
+
+
+      ${messageBlock()}
+
+
+    `
+
+  );
+
+
+  document
+    .getElementById(
+      'checkFirewallBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '查看防火牆阻擋紀錄',
+
+          () => {
+
+
+            state.firewallChecked =
+              true;
+
+
+            lastMessage =
+
+              currentCase.id ===
+                'CASE05_FIREWALL'
+
+                ? '記錄顯示：視像會議軟件的連線被現有安全規則阻擋。'
+
+                : '沒有發現防火牆與目前問題有直接關係。';
+
+          }
+
+        );
+
+      }
+
+    );
+
+
+  const offBtn =
+    document.getElementById(
+      'firewallOffBtn'
+    );
+
+
+  if (
+    offBtn
+  ) {
+
+    offBtn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '完全關閉防火牆',
+
+          () => {
+
+
+            state.firewallOn =
+              false;
+
+
+            state.securityScore =
+              35;
+
+
+            securityIncidentEver =
+              true;
+
+
+            securityIncidentCount++;
+
+
+            if (
+
+              currentCase.id ===
+                'CASE05_FIREWALL'
+
+            ) {
+
+              state.meetingWorking =
+                true;
+
+
+              lastMessage =
+                '視像會議現在可以連線，但防火牆已完全關閉。';
+
+            }
+
+            else {
+
+              lastMessage =
+                '防火牆已關閉，但原本的問題沒有因此得到解決。';
+
+            }
+
+          },
+
+          {
+            undoable:
+              false
+          }
+
+        );
+
+      }
+
+    );
+
   }
 
-  const allowBtn = document.getElementById('allowMeetingBtn');
-  if (allowBtn) {
-    allowBtn.addEventListener('click',() => {
-      performAction('調整防火牆規則',() => {
-        state.meetingBlocked = false;
-        state.meetingWorking = true;
-        state.firewallOn = true;
-        state.securityScore = securityIncidentEver ? 90 : 100;
-        lastMessage = '已只容許視像會議所需的連線。視像會議恢復正常，而其他安全規則仍然生效。';
-      });
-    });
+
+  const onBtn =
+    document.getElementById(
+      'firewallOnBtn'
+    );
+
+
+  if (
+    onBtn
+  ) {
+
+    onBtn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '重新開啟防火牆',
+
+          () => {
+
+
+            state.firewallOn =
+              true;
+
+
+            state.securityScore =
+
+              securityIncidentEver
+
+                ? 80
+
+                : 100;
+
+
+            if (
+
+              currentCase.id ===
+                'CASE05_FIREWALL' &&
+
+              state.meetingBlocked
+
+            ) {
+
+              state.meetingWorking =
+                false;
+
+            }
+
+
+            lastMessage =
+              '防火牆已重新開啟。可疑連線再次受到安全規則控制。';
+
+          },
+
+          {
+            undoable:
+              false
+          }
+
+        );
+
+      }
+
+    );
+
   }
+
+
+  const allowBtn =
+    document.getElementById(
+      'allowMeetingBtn'
+    );
+
+
+  if (
+    allowBtn
+  ) {
+
+    allowBtn.addEventListener(
+
+      'click',
+
+      () => {
+
+        performAction(
+
+          '調整防火牆規則',
+
+          () => {
+
+
+            state.meetingBlocked =
+              false;
+
+
+            state.meetingWorking =
+              true;
+
+
+            state.firewallOn =
+              true;
+
+
+            state.securityScore =
+
+              securityIncidentEver
+
+                ? 90
+
+                : 100;
+
+
+            lastMessage =
+              '已只容許視像會議所需的連線。視像會議恢復正常，而其他安全規則仍然生效。';
+
+          }
+
+        );
+
+      }
+
+    );
+
+  }
+
 }
 
+
+/* =========================================================
+   SECURITY ALERT
+========================================================= */
+
+
 function showSecurityAlert() {
-  if (state.firewallOn) {
+
+  if (
+    state.firewallOn
+  ) {
+
     removeSecurityAlert();
+
     return;
+
   }
 
-  if (document.getElementById('securityAlertWindow')) {
+
+  if (
+
+    document.getElementById(
+      'securityAlertWindow'
+    )
+
+  ) {
+
     updateSecurityAlert();
+
     return;
+
   }
 
-  const alertWindow = document.createElement('div');
-  alertWindow.id = 'securityAlertWindow';
-  alertWindow.className = 'security-alert-floating';
-  alertWindow.setAttribute('role','alert');
 
-  const meetingMessage = currentCase.id === 'CASE05_FIREWALL'
-    ? `
-      <div class="result warning-result">
-        <strong>✓ 視像會議現在可以連線</strong><br><br>
-        但是這個結果是因為防火牆（Firewall）已被完全關閉。<br><br>
-        <strong>功能恢復 ≠ 處理方法合適</strong>
-      </div>
-    `
-    : '';
+  const alertWindow =
+    document.createElement(
+      'div'
+    );
+
+
+  alertWindow.id =
+    'securityAlertWindow';
+
+
+  alertWindow.className =
+    'security-alert-floating';
+
+
+  alertWindow.setAttribute(
+    'role',
+    'alert'
+  );
+
+
+  const meetingMessage =
+
+    currentCase.id ===
+      'CASE05_FIREWALL'
+
+      ? `
+
+        <div class="result warning-result">
+
+          <strong>
+
+            ✓ 視像會議現在可以連線
+
+          </strong>
+
+          <br><br>
+
+          但是這個結果是因為
+          防火牆（Firewall）
+          已被完全關閉。
+
+          <br><br>
+
+          <strong>
+
+            功能恢復 ≠ 處理方法合適
+
+          </strong>
+
+        </div>
+
+      `
+
+      : '';
+
 
   alertWindow.innerHTML = `
-    <div id="securityDragHandle" class="security-alert-header">
-      <span class="security-alert-icon">🚨</span>
-      <span class="security-alert-title">系統安全警告</span>
-      <span class="security-alert-lock">🔒 不能關閉</span>
+
+    <div
+      id="securityDragHandle"
+      class="security-alert-header"
+    >
+
+
+      <span class="security-alert-icon">
+
+        🚨
+
+      </span>
+
+
+      <span class="security-alert-title">
+
+        系統安全警告
+
+      </span>
+
+
+      <span class="security-alert-lock">
+
+        🔒 不能關閉
+
+      </span>
+
+
     </div>
 
-    <div class="security-alert-body">
-      <div class="security-danger-title">防火牆已關閉！</div>
 
-      <p>電腦現時沒有受到防火牆（Firewall）的正常網絡規則保護。</p>
+    <div class="security-alert-body">
+
+
+      <div class="security-danger-title">
+
+        防火牆已關閉！
+
+      </div>
+
+
+      <p>
+
+        電腦現時沒有受到
+        防火牆（Firewall）
+        的正常網絡規則保護。
+
+      </p>
+
 
       ${meetingMessage}
 
+
       <div class="security-score-box">
-        <div>安全水平</div>
-        <div id="securityAlertScore" class="security-score-number">${state.securityScore}%</div>
-        <div class="progress">
-          <div id="securityAlertBar" class="progress-fill bad" style="width:${state.securityScore}%"></div>
+
+
+        <div>
+          安全水平
         </div>
+
+
+        <div
+          id="securityAlertScore"
+          class="security-score-number"
+        >
+
+          ${state.securityScore}%
+
+        </div>
+
+
+        <div class="progress">
+
+          <div
+            id="securityAlertBar"
+            class="progress-fill bad"
+            style="
+              width:
+              ${state.securityScore}%
+            "
+          >
+          </div>
+
+        </div>
+
+
       </div>
 
-      <strong>即時安全事件</strong>
+
+      <strong>
+        即時安全事件
+      </strong>
+
 
       <div class="security-event-list">
-        <div class="security-event">🔴 防火牆（Firewall）已被完全關閉</div>
-        <div class="security-event">🔴 偵測到未知裝置嘗試建立 incoming network connection</div>
-        <div class="security-event">🟠 原有 Firewall rule 現在不能正常阻擋該連線嘗試</div>
-        <div class="security-event">🟠 學校電腦的網絡安全風險上升</div>
+
+
+        <div class="security-event">
+
+          🔴 防火牆（Firewall）
+          已被完全關閉
+
+        </div>
+
+
+        <div class="security-event">
+
+          🔴 偵測到未知裝置嘗試建立
+          incoming network connection
+
+        </div>
+
+
+        <div class="security-event">
+
+          🟠 原有 Firewall rule
+          現在不能正常阻擋該連線嘗試
+
+        </div>
+
+
+        <div class="security-event">
+
+          🟠 學校電腦的網絡安全風險上升
+
+        </div>
+
+
       </div>
+
 
       <div class="security-alert-note">
-        這是一個模擬安全事件。<br><br>
+
+        這是一個模擬安全事件。
+
+        <br><br>
+
         關閉防火牆並不代表電腦一定會立即被入侵；
-        模擬重點是原本由 Firewall rule 控制的網絡流量
-        不再受到相同保護，令風險上升。
+        模擬重點是原本由 Firewall rule
+        控制的網絡流量不再受到相同保護，
+        令風險上升。
+
       </div>
+
 
       <div class="security-alert-instruction">
-        🔥 請開啟桌面的「防火牆（Firewall）」並重新開啟防火牆。<br><br>
-        這個警告在 Firewall 重新開啟前不能關閉。
+
+        🔥 請開啟桌面的
+        「防火牆（Firewall）」
+        並重新開啟防火牆。
+
+        <br><br>
+
+        這個警告在 Firewall
+        重新開啟前不能關閉。
+
+        <br>
+
         你可以拖動這個警告視窗。
+
       </div>
+
+
     </div>
+
   `;
 
-  document.body.appendChild(alertWindow);
+
+  document
+    .body
+    .appendChild(
+      alertWindow
+    );
+
+
   makeSecurityAlertDraggable();
+
 }
+
 
 function updateSecurityAlert() {
-  const score = document.getElementById('securityAlertScore');
-  const bar = document.getElementById('securityAlertBar');
 
-  if (score) score.textContent = state.securityScore + '%';
-  if (bar) bar.style.width = state.securityScore + '%';
+  const score =
+    document.getElementById(
+      'securityAlertScore'
+    );
+
+
+  const bar =
+    document.getElementById(
+      'securityAlertBar'
+    );
+
+
+  if (
+    score
+  ) {
+
+    score.textContent =
+      state.securityScore +
+      '%';
+
+  }
+
+
+  if (
+    bar
+  ) {
+
+    bar.style.width =
+      state.securityScore +
+      '%';
+
+  }
+
 }
+
 
 function removeSecurityAlert() {
-  const alertWindow = document.getElementById('securityAlertWindow');
-  if (alertWindow) alertWindow.remove();
+
+  const alertWindow =
+    document.getElementById(
+      'securityAlertWindow'
+    );
+
+
+  if (
+    alertWindow
+  ) {
+
+    alertWindow.remove();
+
+  }
+
 }
+
+
+/* =========================================================
+   DRAG SECURITY ALERT
+========================================================= */
+
 
 function makeSecurityAlertDraggable() {
-  const alertWindow = document.getElementById('securityAlertWindow');
-  const handle = document.getElementById('securityDragHandle');
 
-  if (!alertWindow || !handle) return;
+  const alertWindow =
+    document.getElementById(
+      'securityAlertWindow'
+    );
 
-  let dragging = false;
-  let startPointerX = 0;
-  let startPointerY = 0;
-  let startLeft = 0;
-  let startTop = 0;
 
-  handle.addEventListener('pointerdown',event => {
-    dragging = true;
+  const handle =
+    document.getElementById(
+      'securityDragHandle'
+    );
 
-    const rect = alertWindow.getBoundingClientRect();
 
-    alertWindow.style.left = rect.left + 'px';
-    alertWindow.style.top = rect.top + 'px';
-    alertWindow.style.right = 'auto';
-    alertWindow.style.bottom = 'auto';
+  if (
 
-    startPointerX = event.clientX;
-    startPointerY = event.clientY;
-    startLeft = rect.left;
-    startTop = rect.top;
+    !alertWindow ||
 
-    handle.setPointerCapture(event.pointerId);
-  });
+    !handle
 
-  handle.addEventListener('pointermove',event => {
-    if (!dragging) return;
+  ) {
 
-    const deltaX = event.clientX - startPointerX;
-    const deltaY = event.clientY - startPointerY;
-    const rect = alertWindow.getBoundingClientRect();
+    return;
 
-    const maxLeft = Math.max(0,window.innerWidth - rect.width);
-    const maxTop = Math.max(0,window.innerHeight - rect.height);
+  }
 
-    const newLeft = Math.min(Math.max(0,startLeft + deltaX),maxLeft);
-    const newTop = Math.min(Math.max(0,startTop + deltaY),maxTop);
 
-    alertWindow.style.left = newLeft + 'px';
-    alertWindow.style.top = newTop + 'px';
-  });
+  let dragging =
+    false;
 
-  function stopDragging(event) {
-    if (!dragging) return;
-    dragging = false;
+
+  let startPointerX =
+    0;
+
+
+  let startPointerY =
+    0;
+
+
+  let startLeft =
+    0;
+
+
+  let startTop =
+    0;
+
+
+  handle.addEventListener(
+
+    'pointerdown',
+
+    event => {
+
+
+      dragging =
+        true;
+
+
+      const rect =
+        alertWindow
+          .getBoundingClientRect();
+
+
+      alertWindow.style.left =
+        rect.left +
+        'px';
+
+
+      alertWindow.style.top =
+        rect.top +
+        'px';
+
+
+      alertWindow.style.right =
+        'auto';
+
+
+      startPointerX =
+        event.clientX;
+
+
+      startPointerY =
+        event.clientY;
+
+
+      startLeft =
+        rect.left;
+
+
+      startTop =
+        rect.top;
+
+
+      handle.setPointerCapture(
+        event.pointerId
+      );
+
+    }
+
+  );
+
+
+  handle.addEventListener(
+
+    'pointermove',
+
+    event => {
+
+
+      if (
+        !dragging
+      ) {
+
+        return;
+
+      }
+
+
+      const deltaX =
+        event.clientX -
+        startPointerX;
+
+
+      const deltaY =
+        event.clientY -
+        startPointerY;
+
+
+      const rect =
+        alertWindow
+          .getBoundingClientRect();
+
+
+      const maxLeft =
+        Math.max(
+
+          0,
+
+          window.innerWidth -
+          rect.width
+
+        );
+
+
+      const maxTop =
+        Math.max(
+
+          0,
+
+          window.innerHeight -
+          rect.height
+
+        );
+
+
+      const newLeft =
+        Math.min(
+
+          Math.max(
+
+            0,
+
+            startLeft +
+            deltaX
+
+          ),
+
+          maxLeft
+
+        );
+
+
+      const newTop =
+        Math.min(
+
+          Math.max(
+
+            0,
+
+            startTop +
+            deltaY
+
+          ),
+
+          maxTop
+
+        );
+
+
+      alertWindow.style.left =
+        newLeft +
+        'px';
+
+
+      alertWindow.style.top =
+        newTop +
+        'px';
+
+    }
+
+  );
+
+
+  function stopDragging(
+    event
+  ) {
+
+    if (
+      !dragging
+    ) {
+
+      return;
+
+    }
+
+
+    dragging =
+      false;
+
 
     try {
-      handle.releasePointerCapture(event.pointerId);
-    } catch (error) {}
+
+      handle
+        .releasePointerCapture(
+          event.pointerId
+        );
+
+    }
+
+    catch (error) {
+
+      /*
+        無需處理。
+      */
+
+    }
+
   }
 
-  handle.addEventListener('pointerup',stopDragging);
-  handle.addEventListener('pointercancel',stopDragging);
+
+  handle.addEventListener(
+
+    'pointerup',
+
+    stopDragging
+
+  );
+
+
+  handle.addEventListener(
+
+    'pointercancel',
+
+    stopDragging
+
+  );
+
 }
 
-function performAction(actionName,changeFunction) {
-  const snapshot = {
-    state: deepClone(state),
-    lastApp,
-    lastMessage,
-    historyLength: actionHistory.length
-  };
 
-  undoStack.push(snapshot);
-  changeFunction();
-  recordAction(actionName,true);
+/* =========================================================
+   PERFORM ACTION
+========================================================= */
 
-  logServer('ACTION',actionName,{
-    state: deepClone(state)
-  });
 
-  if (state.firewallOn && currentCase.fixed(state)) {
-    logServer('CASE_FIXED',currentCase.id,{ action: actionName });
-    setTimeout(showSummary,300);
-    return;
+function performAction(
+  actionName,
+  changeFunction,
+  options = {}
+) {
+
+  const undoable =
+    options.undoable !==
+      false;
+
+
+  if (
+    undoable
+  ) {
+
+    undoStack.push({
+
+      state:
+        deepClone(
+          state
+        ),
+
+      lastApp:
+        lastApp,
+
+      lastMessage:
+        lastMessage,
+
+      actionName:
+        actionName
+
+    });
+
   }
+
+
+  changeFunction();
+
+
+  actionCount++;
+
+
+  /*
+    全部只存在 browser。
+  */
+  recordEvent(
+
+    'ACTION',
+
+    actionName,
+
+    '',
+
+    {
+      state:
+        stateSummary()
+    }
+
+  );
+
+
+  if (
+
+    state.firewallOn &&
+
+    currentCase.fixed(
+      state
+    )
+
+  ) {
+
+    recordEvent(
+
+      'CASE_FIXED',
+
+      '成功修復個案',
+
+      actionName,
+
+      {
+        state:
+          stateSummary()
+      }
+
+    );
+
+
+    setTimeout(
+
+      showSummary,
+
+      300
+
+    );
+
+
+    return;
+
+  }
+
 
   showDesktop();
+
 }
+
+
+/* =========================================================
+   UNDO
+========================================================= */
+
 
 function undoLastAction() {
-  if (!state.firewallOn || undoStack.length === 0) return;
 
-  const snapshot = undoStack.pop();
+  /*
+    Firewall Off 時不能用 Undo
+    繞過 Security Alert。
 
-  state = deepClone(snapshot.state);
-  lastApp = snapshot.lastApp;
-  lastMessage = '已復原上一個操作。';
-  actionHistory = actionHistory.slice(0,snapshot.historyLength);
+    必須真的在 Firewall app
+    重新開啟 Firewall。
+  */
+  if (
+
+    !state.firewallOn ||
+
+    undoStack.length ===
+      0
+
+  ) {
+
+    return;
+
+  }
+
+
+  const snapshot =
+    undoStack.pop();
+
+
+  state =
+    deepClone(
+      snapshot.state
+    );
+
+
+  lastApp =
+    snapshot.lastApp;
+
+
+  lastMessage =
+
+    `已復原：
+    ${snapshot.actionName}`;
+
+
   undoCount++;
 
-  actionHistory.push({
-    time: getTime(),
-    action: '復原上一個操作'
-  });
 
-  logServer('UNDO','復原上一個操作',{
-    state: deepClone(state)
-  });
+  /*
+    重要：
+    新版不會刪除被 Undo 的舊 action。
+
+    老師仍然看得到：
+    關過甚麼、試過甚麼、然後 Undo。
+  */
+  recordEvent(
+
+    'UNDO',
+
+    '復原上一個操作',
+
+    snapshot.actionName,
+
+    {
+      state:
+        stateSummary()
+    }
+
+  );
+
+
+  pendingSubmissionPayload =
+    null;
+
+
+  submissionInFlight =
+    false;
+
 
   showDesktop();
+
 }
 
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+
 function showSummary() {
+
   removeSecurityAlert();
 
-  const summary = currentCase.summary;
-  const usefulActions = getUsefulActions();
-  const unnecessaryActions = getUnnecessaryActions();
 
-  const historyHtml = actionHistory.map(item => `
-    <div class="timeline-item">
-      <div class="timeline-time">${escapeHtml(item.time)}</div>
-      <strong>${escapeHtml(item.action)}</strong>
-    </div>
-  `).join('');
+  const summary =
+    currentCase.summary;
+
+
+  const usefulActions =
+    getUsefulActions();
+
+
+  const unnecessaryActions =
+    getUnnecessaryActions();
+
+
+  /*
+    學生 Summary 不需要顯示所有
+    Open App events。
+
+    Teacher Sheet 仍然會保存全部。
+  */
+  const visibleEvents =
+    actionHistory.filter(
+
+      event =>
+
+        event.event_type ===
+          'ACTION' ||
+
+        event.event_type ===
+          'UNDO' ||
+
+        event.event_type ===
+          'CASE_FIXED'
+
+    );
+
+
+  const historyHtml =
+    visibleEvents
+
+      .map(
+
+        item => `
+
+          <div class="timeline-item">
+
+
+            <div class="timeline-time">
+
+              ${escapeHtml(
+                item.display_time
+              )}
+
+            </div>
+
+
+            <strong>
+
+              ${escapeHtml(
+                item.action
+              )}
+
+            </strong>
+
+
+            ${
+              item.event_type ===
+                'UNDO' &&
+
+              item.value
+
+                ? `
+
+                  <div class="muted">
+
+                    復原：
+                    ${escapeHtml(
+                      item.value
+                    )}
+
+                  </div>
+
+                `
+
+                : ''
+            }
+
+
+          </div>
+
+        `
+
+      )
+
+      .join('');
+
 
   app.innerHTML = `
+
     <div class="summary-screen">
+
+
       <div class="summary-card summary-success">
-        <div class="big-icon">✅</div>
-        <h1>個案已成功修復</h1>
-        <p>${escapeHtml(currentCase.title)}</p>
-      </div>
 
-      <div class="summary-card">
-        <h2>個案總結</h2>
-        <div class="concept-box">
-          <p><strong>問題原因</strong><br>${escapeHtml(summary.cause)}</p>
-          <p><strong>關鍵證據</strong><br>${escapeHtml(summary.evidence)}</p>
-          <p><strong>較合適的處理方法</strong><br>${escapeHtml(summary.bestAction)}</p>
+
+        <div class="big-icon">
+
+          ✅
+
         </div>
+
+
+        <h1>
+
+          個案已成功修復
+
+        </h1>
+
+
+        <p>
+
+          ${escapeHtml(
+            currentCase.title
+          )}
+
+        </p>
+
+
       </div>
 
+
       <div class="summary-card">
-        <h2>必記 ICT 概念</h2>
-        <p>${escapeHtml(summary.concept)}</p>
+
+
+        <h2>
+          個案總結
+        </h2>
+
+
+        <div class="concept-box">
+
+
+          <p>
+
+            <strong>
+              問題原因
+            </strong>
+
+            <br>
+
+            ${escapeHtml(
+              summary.cause
+            )}
+
+          </p>
+
+
+          <p>
+
+            <strong>
+              關鍵證據
+            </strong>
+
+            <br>
+
+            ${escapeHtml(
+              summary.evidence
+            )}
+
+          </p>
+
+
+          <p>
+
+            <strong>
+              較合適的處理方法
+            </strong>
+
+            <br>
+
+            ${escapeHtml(
+              summary.bestAction
+            )}
+
+          </p>
+
+
+        </div>
+
+
       </div>
+
+
+      <div class="summary-card">
+
+
+        <h2>
+          必記 ICT 概念
+        </h2>
+
+
+        <p>
+
+          ${escapeHtml(
+            summary.concept
+          )}
+
+        </p>
+
+
+      </div>
+
 
       ${
         securityIncidentEver
+
           ? `
+
             <div class="summary-card">
-              <h2>🚨 安全事件紀錄</h2>
+
+
+              <h2>
+
+                🚨 安全事件紀錄
+
+              </h2>
+
+
               <div class="result danger-result">
-                你曾經完全關閉防火牆（Firewall）。<br><br>
-                系統因此出現模擬可疑網絡連線警告。<br><br>
-                即使其後重新開啟防火牆，這個安全事件仍會保留在你的操作紀錄。
+
+                你曾經完全關閉
+                防火牆（Firewall）。
+
+                <br><br>
+
+                系統因此出現模擬
+                可疑網絡連線警告。
+
+                <br><br>
+
+                即使其後重新開啟防火牆，
+                這個安全事件仍會保留在
+                操作紀錄中。
+
               </div>
-              <p><strong>安全事件次數：</strong>${securityIncidentCount}</p>
-              <p><strong>Learning Point：</strong>解決功能問題，不代表所使用的方法安全或合適。</p>
+
+
+              <p>
+
+                <strong>
+                  安全事件次數：
+                </strong>
+
+                ${securityIncidentCount}
+
+              </p>
+
+
+              <p>
+
+                <strong>
+                  Learning Point：
+                </strong>
+
+                解決功能問題，
+                不代表所使用的方法安全或合適。
+
+              </p>
+
+
             </div>
+
           `
+
           : ''
       }
 
+
       <div class="summary-card">
-        <h2>你的操作歷程</h2>
-        <div class="timeline">${historyHtml}</div>
+
+
+        <h2>
+          你的操作歷程
+        </h2>
+
+
+        <div class="timeline">
+
+          ${historyHtml}
+
+        </div>
+
 
         ${
           usefulActions.length
-            ? `<div class="result good-result"><strong>有助診斷／修復的操作：</strong><br>${escapeHtml(usefulActions.join('、'))}</div>`
+
+            ? `
+
+              <div class="result good-result">
+
+                <strong>
+                  有助診斷／修復的操作：
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                  usefulActions.join(
+                    '、'
+                  )
+                )}
+
+              </div>
+
+            `
+
             : ''
         }
+
 
         ${
           unnecessaryActions.length
-            ? `<div class="result warning-result"><strong>值得反思的操作：</strong><br>${escapeHtml(unnecessaryActions.join('、'))}<br><br>這些操作未能直接處理今次個案的主要問題，或帶來不必要的風險。</div>`
+
+            ? `
+
+              <div class="result warning-result">
+
+                <strong>
+                  值得反思的操作：
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                  unnecessaryActions.join(
+                    '、'
+                  )
+                )}
+
+                <br><br>
+
+                這些操作未能直接處理
+                今次個案的主要問題，
+                或帶來不必要的風險。
+
+              </div>
+
+            `
+
             : ''
         }
+
+
       </div>
 
+
       <div class="summary-card">
-        <h2>個人提交</h2>
-        <p class="muted">可以與組員討論，但以下答案必須由你本人提交。</p>
+
+
+        <h2>
+          個人提交
+        </h2>
+
+
+        <p class="muted">
+
+          可以與組員討論，
+          但以下答案必須由你本人提交。
+
+        </p>
+
 
         <div class="field">
-          <label>這宗個案最主要的問題是甚麼？</label>
+
+
+          <label>
+
+            這宗個案最主要的問題是甚麼？
+
+          </label>
+
+
           <select id="finalAnswer">
-            <option value="">請選擇</option>
-            ${currentCase.answerOptions.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('')}
+
+
+            <option value="">
+
+              請選擇
+
+            </option>
+
+
+            ${
+              currentCase.answerOptions
+
+                .map(
+
+                  option => `
+
+                    <option
+                      value="${escapeHtml(
+                        option
+                      )}"
+                    >
+
+                      ${escapeHtml(
+                        option
+                      )}
+
+                    </option>
+
+                  `
+
+                )
+
+                .join('')
+            }
+
+
           </select>
+
+
         </div>
+
 
         ${
           currentCase.shortQuestion
+
             ? `
+
               <div class="field">
-                <label>${escapeHtml(currentCase.shortQuestion)}</label>
-                <textarea id="shortAnswer" maxlength="150" placeholder="請用 1–2 句回答。"></textarea>
+
+
+                <label>
+
+                  ${escapeHtml(
+                    currentCase.shortQuestion
+                  )}
+
+                </label>
+
+
+                <textarea
+                  id="shortAnswer"
+                  maxlength="150"
+                  placeholder="請用 1–2 句回答。"
+                ></textarea>
+
+
               </div>
+
             `
+
             : ''
         }
 
+
         <div class="field">
-          <label>你對自己的理解有多大信心？</label>
+
+
+          <label>
+
+            你對自己的理解有多大信心？
+
+          </label>
+
+
           <select id="confidence">
-            <option value="">請選擇</option>
-            <option value="Low">不太確定</option>
-            <option value="Medium">有些把握</option>
-            <option value="High">非常有信心</option>
+
+
+            <option value="">
+
+              請選擇
+
+            </option>
+
+
+            <option value="Low">
+
+              不太確定
+
+            </option>
+
+
+            <option value="Medium">
+
+              有些把握
+
+            </option>
+
+
+            <option value="High">
+
+              非常有信心
+
+            </option>
+
+
           </select>
+
+
         </div>
+
 
         <div class="action-buttons">
-          <button id="undoFromSummary" class="btn" ${undoStack.length === 0 ? 'disabled' : ''}>↶ 復原最後操作並返回電腦</button>
-          <button id="submitCaseBtn" class="btn btn-success">提交我的個人答案</button>
+
+
+          <button
+            id="undoFromSummary"
+            class="btn"
+            ${
+              undoStack.length ===
+                0
+
+                ? 'disabled'
+
+                : ''
+            }
+          >
+
+            ↶ 復原最後操作並返回電腦
+
+          </button>
+
+
+          <button
+            id="submitCaseBtn"
+            class="btn btn-success"
+          >
+
+            提交我的個人答案
+
+          </button>
+
+
         </div>
 
-        <div id="submitMessage"></div>
+
+        <div id="submitMessage">
+        </div>
+
+
       </div>
+
+
     </div>
+
   `;
 
-  document.getElementById('undoFromSummary').addEventListener('click',undoLastAction);
-  document.getElementById('submitCaseBtn').addEventListener('click',submitCase);
+
+  document
+    .getElementById(
+      'undoFromSummary'
+    )
+    .addEventListener(
+
+      'click',
+
+      undoLastAction
+
+    );
+
+
+  document
+    .getElementById(
+      'submitCaseBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      submitCase
+
+    );
+
 }
+
+
+/* =========================================================
+   ACTION ANALYSIS
+========================================================= */
+
+
+function getActionNames() {
+
+  return actionHistory
+
+    .filter(
+      event =>
+        event.event_type ===
+        'ACTION'
+    )
+
+    .map(
+      event =>
+        event.action
+    );
+
+}
+
 
 function getUsefulActions() {
-  const names = actionHistory.map(item => item.action);
+
+  const names =
+    getActionNames();
+
 
   const map = {
-    CASE01_DRIVER: ['檢查打印機驅動程式','更新打印機驅動程式'],
-    CASE02_CPU: ['結束 VideoRender.exe'],
-    CASE03_STORAGE: ['執行磁碟清理'],
-    CASE04_MALWARE: ['執行病毒掃描','隔離／移除惡意項目'],
-    CASE05_FIREWALL: ['查看防火牆阻擋紀錄','調整防火牆規則']
+
+
+    CASE01_DRIVER: [
+
+      '檢查打印機驅動程式',
+
+      '更新打印機驅動程式'
+
+    ],
+
+
+    CASE02_CPU: [
+
+      '結束 VideoRender.exe'
+
+    ],
+
+
+    CASE03_STORAGE: [
+
+      '執行磁碟清理'
+
+    ],
+
+
+    CASE04_MALWARE: [
+
+      '執行病毒掃描',
+
+      '隔離／移除惡意項目'
+
+    ],
+
+
+    CASE05_FIREWALL: [
+
+      '查看防火牆阻擋紀錄',
+
+      '調整防火牆規則'
+
+    ]
+
   };
 
-  return (map[currentCase.id] || []).filter(action => names.includes(action));
+
+  return (
+
+    map[
+      currentCase.id
+    ] || []
+
+  ).filter(
+
+    action =>
+      names.includes(
+        action
+      )
+
+  );
+
 }
+
 
 function getUnnecessaryActions() {
-  const names = actionHistory.map(item => item.action);
+
+  const names =
+    getActionNames();
+
 
   const wrongMap = {
-    CASE01_DRIVER: ['執行磁碟清理','執行病毒掃描','完全關閉防火牆'],
-    CASE02_CPU: ['執行磁碟清理','執行病毒掃描','完全關閉防火牆'],
-    CASE03_STORAGE: ['執行病毒掃描','完全關閉防火牆'],
-    CASE04_MALWARE: ['執行磁碟清理','完全關閉防火牆'],
-    CASE05_FIREWALL: ['執行磁碟清理','執行病毒掃描','完全關閉防火牆']
+
+
+    CASE01_DRIVER: [
+
+      '執行磁碟清理',
+
+      '執行病毒掃描',
+
+      '完全關閉防火牆'
+
+    ],
+
+
+    CASE02_CPU: [
+
+      '執行磁碟清理',
+
+      '執行病毒掃描',
+
+      '完全關閉防火牆'
+
+    ],
+
+
+    CASE03_STORAGE: [
+
+      '執行病毒掃描',
+
+      '完全關閉防火牆'
+
+    ],
+
+
+    CASE04_MALWARE: [
+
+      '執行磁碟清理',
+
+      '完全關閉防火牆'
+
+    ],
+
+
+    CASE05_FIREWALL: [
+
+      '執行磁碟清理',
+
+      '執行病毒掃描',
+
+      '完全關閉防火牆'
+
+    ]
+
   };
 
-  return (wrongMap[currentCase.id] || []).filter(action => names.includes(action));
+
+  return (
+
+    wrongMap[
+      currentCase.id
+    ] || []
+
+  ).filter(
+
+    action =>
+      names.includes(
+        action
+      )
+
+  );
+
 }
+
+
+/* =========================================================
+   SUBMIT CASE
+========================================================= */
+
 
 function submitCase() {
-  const finalAnswer = document.getElementById('finalAnswer').value;
-  const confidence = document.getElementById('confidence').value;
-  const shortAnswerElement = document.getElementById('shortAnswer');
-  const shortAnswer = shortAnswerElement ? shortAnswerElement.value.trim() : '';
-  const message = document.getElementById('submitMessage');
 
-  if (!finalAnswer || !confidence) {
-    message.innerHTML = `<div class="result danger-result">請完成個人答案及信心程度。</div>`;
+  if (
+    submissionInFlight
+  ) {
+
     return;
+
   }
 
-  if (currentCase.shortQuestion && !shortAnswer) {
-    message.innerHTML = `<div class="result danger-result">請完成短答題。</div>`;
-    return;
+
+  const button =
+    document.getElementById(
+      'submitCaseBtn'
+    );
+
+
+  const message =
+    document.getElementById(
+      'submitMessage'
+    );
+
+
+  /*
+    如果上一次 submit 全部 retry 都失敗，
+    pendingSubmissionPayload 仍然保留。
+
+    再按「重新提交」會使用同一 Submission_ID，
+    防止 duplicate。
+  */
+  if (
+    !pendingSubmissionPayload
+  ) {
+
+
+    const finalAnswer =
+      document
+        .getElementById(
+          'finalAnswer'
+        )
+        .value;
+
+
+    const confidence =
+      document
+        .getElementById(
+          'confidence'
+        )
+        .value;
+
+
+    const shortAnswerElement =
+      document
+        .getElementById(
+          'shortAnswer'
+        );
+
+
+    const shortAnswer =
+
+      shortAnswerElement
+
+        ? shortAnswerElement
+            .value
+            .trim()
+
+        : '';
+
+
+    if (
+
+      !finalAnswer ||
+
+      !confidence
+
+    ) {
+
+      message.innerHTML = `
+
+        <div class="result danger-result">
+
+          請完成個人答案及信心程度。
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    if (
+
+      currentCase.shortQuestion &&
+
+      !shortAnswer
+
+    ) {
+
+      message.innerHTML = `
+
+        <div class="result danger-result">
+
+          請完成短答題。
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    recordEvent(
+
+      'SUBMIT',
+
+      '提交個人答案',
+
+      finalAnswer,
+
+      {
+        confidence:
+          confidence
+      }
+
+    );
+
+
+    const elapsed =
+      Math.round(
+
+        (
+          Date.now() -
+          caseStartTime
+        ) /
+
+        1000
+
+      );
+
+
+    const submissionId =
+      [
+
+        sessionId,
+
+        currentCase.id,
+
+        Date.now(),
+
+        Math
+          .random()
+          .toString(36)
+          .slice(
+            2,
+            9
+          )
+
+      ].join('-');
+
+
+    /*
+      整個 Case 的資料，
+      一次過送到 server。
+    */
+    pendingSubmissionPayload = {
+
+      ...identity,
+
+
+      session_id:
+        sessionId,
+
+
+      submission_id:
+        submissionId,
+
+
+      client_submitted_at:
+        new Date()
+          .toISOString(),
+
+
+      case_id:
+        currentCase.id,
+
+
+      final_answer:
+        finalAnswer,
+
+
+      short_answer:
+        shortAnswer,
+
+
+      confidence:
+        confidence,
+
+
+      was_fixed:
+        currentCase.fixed(
+          state
+        ),
+
+
+      action_count:
+        actionCount,
+
+
+      undo_count:
+        undoCount,
+
+
+      elapsed_seconds:
+        elapsed,
+
+
+      action_history:
+        actionHistory,
+
+
+      security_incident_ever:
+        securityIncidentEver,
+
+
+      security_incident_count:
+        securityIncidentCount,
+
+
+      final_security_score:
+        state.securityScore
+
+    };
+
   }
 
-  const button = document.getElementById('submitCaseBtn');
-  button.disabled = true;
-  button.textContent = '正在提交……';
 
-  const elapsed = Math.round((Date.now() - caseStartTime) / 1000);
+  submissionInFlight =
+    true;
 
-  const payload = {
-    ...identity,
-    session_id: sessionId,
-    case_id: currentCase.id,
-    final_answer: finalAnswer,
-    short_answer: shortAnswer,
-    confidence,
-    was_fixed: currentCase.fixed(state),
-    action_count: actionCount,
-    undo_count: undoCount,
-    elapsed_seconds: elapsed,
-    action_history: actionHistory,
-    security_incident_ever: securityIncidentEver,
-    security_incident_count: securityIncidentCount,
-    final_security_score: state.securityScore
-  };
 
-  google.script.run
-    .withSuccessHandler(result => {
-      completedCases.add(currentCase.id);
-      logServer('CASE_SUBMIT',currentCase.id,{ finalCorrect: result.finalCorrect });
-      showSubmitted(result.finalCorrect);
-    })
-    .withFailureHandler(error => {
-      button.disabled = false;
-      button.textContent = '重新提交';
-      message.innerHTML = `<div class="result danger-result">提交失敗：${escapeHtml(error.message)}</div>`;
-    })
-    .submitCase(payload);
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    '正在提交……';
+
+
+  sendSubmissionWithRetry(
+
+    pendingSubmissionPayload,
+
+    0
+
+  );
+
 }
 
-function showSubmitted(finalCorrect) {
+
+/* =========================================================
+   SUBMISSION RETRY
+========================================================= */
+
+
+function sendSubmissionWithRetry(
+  payload,
+  attempt
+) {
+
+  const message =
+    document.getElementById(
+      'submitMessage'
+    );
+
+
+  const button =
+    document.getElementById(
+      'submitCaseBtn'
+    );
+
+
+  /*
+    第一次 submit：
+    0–2.5 秒 random jitter。
+
+    33 人同時完成時，
+    不會完全同一毫秒 hit Apps Script。
+  */
+  const delay =
+
+    attempt === 0
+
+      ? Math.floor(
+          Math.random() *
+          2500
+        )
+
+      : retryDelay(
+          attempt
+        );
+
+
+  if (
+    message
+  ) {
+
+    message.innerHTML = `
+
+      <div class="result">
+
+        ${
+          attempt === 0
+
+            ? '正在排隊提交資料……'
+
+            : `伺服器繁忙，正在自動重試（${attempt + 1}/${MAX_SUBMIT_ATTEMPTS}）……`
+        }
+
+        <br><br>
+
+        請不要關閉此頁面。
+
+      </div>
+
+    `;
+
+  }
+
+
+  setTimeout(
+
+    () => {
+
+
+      google.script.run
+
+        .withSuccessHandler(
+
+          result => {
+
+
+            submissionInFlight =
+              false;
+
+
+            pendingSubmissionPayload =
+              null;
+
+
+            completedCases.add(
+              currentCase.id
+            );
+
+
+            showSubmitted(
+              result.finalCorrect
+            );
+
+          }
+
+        )
+
+        .withFailureHandler(
+
+          error => {
+
+
+            if (
+
+              attempt + 1 <
+                MAX_SUBMIT_ATTEMPTS
+
+            ) {
+
+              sendSubmissionWithRetry(
+
+                payload,
+
+                attempt + 1
+
+              );
+
+
+              return;
+
+            }
+
+
+            submissionInFlight =
+              false;
+
+
+            if (
+              button
+            ) {
+
+              button.disabled =
+                false;
+
+
+              button.textContent =
+                '重新提交';
+
+            }
+
+
+            if (
+              message
+            ) {
+
+              message.innerHTML = `
+
+                <div class="result danger-result">
+
+                  暫時未能提交資料。
+
+                  <br><br>
+
+                  系統已保留今次 Submission ID，
+                  你可以按「重新提交」，
+                  不會重複寫入同一份紀錄。
+
+                  <br><br>
+
+                  ${escapeHtml(
+                    errorText(
+                      error
+                    )
+                  )}
+
+                </div>
+
+              `;
+
+            }
+
+          }
+
+        )
+
+        .submitCase(
+          payload
+        );
+
+
+    },
+
+    delay
+
+  );
+
+}
+
+
+/* =========================================================
+   RETRY DELAY
+========================================================= */
+
+
+function retryDelay(
+  attempt
+) {
+
+  const exponential =
+    1200 *
+    Math.pow(
+      2,
+      Math.max(
+        0,
+        attempt - 1
+      )
+    );
+
+
+  const jitter =
+    Math.floor(
+      Math.random() *
+      1000
+    );
+
+
+  return Math.min(
+
+    exponential +
+    jitter,
+
+    10000
+
+  );
+
+}
+
+
+/* =========================================================
+   SUBMITTED SCREEN
+========================================================= */
+
+
+function showSubmitted(
+  finalCorrect
+) {
+
+  removeSecurityAlert();
+
+
   app.innerHTML = `
+
     <div class="summary-screen">
+
+
       <div class="summary-card summary-success">
-        <div class="big-icon">${finalCorrect ? '✅' : '📘'}</div>
-        <h1>個人答案已提交</h1>
+
+
+        <div class="big-icon">
+
+          ${
+            finalCorrect
+
+              ? '✅'
+
+              : '📘'
+          }
+
+        </div>
+
+
+        <h1>
+
+          個人答案已提交
+
+        </h1>
+
 
         ${
           finalCorrect
-            ? `<p>你的最終概念判斷正確。</p>`
+
+            ? `
+
+              <p>
+
+                你的最終概念判斷正確。
+
+              </p>
+
+            `
+
             : `
-              <p>你已成功完成個案，但最終概念判斷仍有需要改善的地方。</p>
-              <div class="result warning-result"><strong>再記住：</strong><br>${escapeHtml(currentCase.summary.concept)}</div>
+
+              <p>
+
+                你已成功完成個案，
+                但最終概念判斷仍有需要改善的地方。
+
+              </p>
+
+
+              <div class="result warning-result">
+
+                <strong>
+                  再記住：
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                  currentCase.summary.concept
+                )}
+
+              </div>
+
             `
         }
 
+
         <div class="action-buttons">
-          <button id="returnHub" class="btn btn-primary">返回個案列表</button>
+
+
+          <button
+            id="returnHub"
+            class="btn btn-primary"
+          >
+
+            返回個案列表
+
+          </button>
+
+
         </div>
+
+
       </div>
+
+
     </div>
+
   `;
 
-  document.getElementById('returnHub').addEventListener('click',showHub);
+
+  document
+    .getElementById(
+      'returnHub'
+    )
+    .addEventListener(
+
+      'click',
+
+      showHub
+
+    );
+
 }
+
+
+/* =========================================================
+   LEAVE CASE
+========================================================= */
+
 
 function confirmLeaveCase() {
-  if (!state.firewallOn) return;
 
-  const modal = document.createElement('div');
-  modal.className = 'modal';
+  if (
+    !state.firewallOn
+  ) {
+
+    return;
+
+  }
+
+
+  const modal =
+    document.createElement(
+      'div'
+    );
+
+
+  modal.className =
+    'modal';
+
 
   modal.innerHTML = `
+
     <div class="modal-card">
-      <h2>離開目前個案？</h2>
-      <p>尚未提交的操作進度將會消失。</p>
+
+
+      <h2>
+
+        離開目前個案？
+
+      </h2>
+
+
+      <p>
+
+        尚未提交的操作進度將會消失。
+
+      </p>
+
 
       <div class="action-buttons">
-        <button id="stayBtn" class="btn">繼續處理</button>
-        <button id="leaveBtn" class="btn btn-danger">離開個案</button>
+
+
+        <button
+          id="stayBtn"
+          class="btn"
+        >
+
+          繼續處理
+
+        </button>
+
+
+        <button
+          id="leaveBtn"
+          class="btn btn-danger"
+        >
+
+          離開個案
+
+        </button>
+
+
       </div>
+
+
     </div>
+
   `;
 
-  document.body.appendChild(modal);
-  document.getElementById('stayBtn').addEventListener('click',() => modal.remove());
-  document.getElementById('leaveBtn').addEventListener('click',() => {
-    modal.remove();
-    showHub();
+
+  document
+    .body
+    .appendChild(
+      modal
+    );
+
+
+  document
+    .getElementById(
+      'stayBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () =>
+        modal.remove()
+
+    );
+
+
+  document
+    .getElementById(
+      'leaveBtn'
+    )
+    .addEventListener(
+
+      'click',
+
+      () => {
+
+        modal.remove();
+
+        showHub();
+
+      }
+
+    );
+
+}
+
+
+/* =========================================================
+   LOCAL EVENT BUFFER
+========================================================= */
+
+
+/*
+  全部 action logging
+  現在只寫 browser memory。
+
+  不會 call server。
+*/
+function recordEvent(
+  eventType,
+  action,
+  value = '',
+  details = {}
+) {
+
+  if (
+
+    actionHistory.length >=
+      MAX_LOCAL_EVENTS
+
+  ) {
+
+    return;
+
+  }
+
+
+  eventCounter++;
+
+
+  const now =
+    new Date();
+
+
+  actionHistory.push({
+
+    event_index:
+      eventCounter,
+
+    client_time:
+      now.toISOString(),
+
+    display_time:
+      now.toLocaleTimeString(
+
+        'zh-HK',
+
+        {
+
+          hour:
+            '2-digit',
+
+          minute:
+            '2-digit',
+
+          second:
+            '2-digit'
+
+        }
+
+      ),
+
+    event_type:
+      eventType,
+
+    action:
+      action,
+
+    value:
+      value,
+
+    details:
+      details
+
   });
+
 }
 
-function recordAction(action,includeInCount = true) {
-  actionHistory.push({ time: getTime(), action });
-  if (includeInCount) actionCount++;
+
+/* =========================================================
+   STATE SUMMARY
+========================================================= */
+
+
+function stateSummary() {
+
+  return {
+
+    cpu:
+      state.cpu,
+
+    memory:
+      state.memory,
+
+    freeDisk:
+      state.freeDisk,
+
+    firewallOn:
+      state.firewallOn,
+
+    securityScore:
+      state.securityScore,
+
+    malware:
+      state.malware,
+
+    printerWorking:
+      state.printerWorking,
+
+    meetingWorking:
+      state.meetingWorking
+
+  };
+
 }
 
-function recordPassive(type,value) {
-  logServer(type,value,{});
+
+/* =========================================================
+   WINDOW HELPERS
+========================================================= */
+
+
+function setWindow(
+  title,
+  html
+) {
+
+  document
+    .getElementById(
+      'windowTitle'
+    )
+    .textContent =
+      title;
+
+
+  document
+    .getElementById(
+      'windowContent'
+    )
+    .innerHTML =
+      html;
+
 }
 
-function logServer(type,value,details) {
-  if (!identity) return;
 
-  google.script.run
-    .withFailureHandler(() => {})
-    .logAction({
-      ...identity,
-      session_id: sessionId,
-      case_id: currentCase ? currentCase.id : 'SESSION',
-      action_type: type,
-      action_value: value,
-      details: details || {}
-    });
-}
+function statusCard(
+  label,
+  value,
+  className,
+  percentage
+) {
 
-function setWindow(title,html) {
-  document.getElementById('windowTitle').textContent = title;
-  document.getElementById('windowContent').innerHTML = html;
-}
-
-function statusCard(label,value,className,percentage) {
   return `
+
     <div class="status-card">
-      <div class="status-label">${label}</div>
-      <div class="status-value ${className}">${value}</div>
+
+
+      <div class="status-label">
+
+        ${label}
+
+      </div>
+
+
+      <div
+        class="status-value ${className}"
+      >
+
+        ${value}
+
+      </div>
+
 
       ${
         percentage !== null
+
           ? `
+
             <div class="progress">
-              <div class="progress-fill ${percentage > 80 ? 'bad' : 'good'}" style="width:${Math.min(percentage,100)}%"></div>
+
+              <div
+                class="progress-fill ${
+                  percentage > 80
+
+                    ? 'bad'
+
+                    : 'good'
+                }"
+                style="
+                  width:
+                  ${Math.min(
+                    percentage,
+                    100
+                  )}%
+                "
+              >
+              </div>
+
             </div>
+
           `
+
           : ''
       }
+
+
     </div>
+
   `;
+
 }
+
 
 function messageBlock() {
-  if (!lastMessage) return '';
-  return `<div class="result">${escapeHtml(lastMessage)}</div>`;
-}
 
-function getTime() {
-  return new Date().toLocaleTimeString('zh-HK',{
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
-}
+  if (
+    !lastMessage
+  ) {
 
-function deepClone(value) {
-  return JSON.parse(JSON.stringify(value));
-}
+    return '';
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'",'&#039;');
-}
+  }
 
-function showError(error) {
-  removeSecurityAlert();
 
-  app.innerHTML = `
-    <div class="login-page">
-      <div class="login-card">
-        <h2>發生錯誤</h2>
-        <div class="result danger-result">${escapeHtml(error.message)}</div>
-        <br>
-        <button id="reloadBtn" class="btn btn-primary">重新載入</button>
-      </div>
+  return `
+
+    <div class="result">
+
+      ${escapeHtml(
+        lastMessage
+      )}
+
     </div>
+
   `;
 
-  document.getElementById('reloadBtn').addEventListener('click',() => location.reload());
 }
 
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+
+function deepClone(
+  value
+) {
+
+  return JSON.parse(
+    JSON.stringify(
+      value
+    )
+  );
+
+}
+
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value
+  )
+
+    .replaceAll(
+      '&',
+      '&amp;'
+    )
+
+    .replaceAll(
+      '<',
+      '&lt;'
+    )
+
+    .replaceAll(
+      '>',
+      '&gt;'
+    )
+
+    .replaceAll(
+      '"',
+      '&quot;'
+    )
+
+    .replaceAll(
+      "'",
+      '&#039;'
+    );
+
+}
+
+
+function errorText(
+  error
+) {
+
+  if (
+    error &&
+    error.message
+  ) {
+
+    return error.message;
+
+  }
+
+
+  return String(
+    error ||
+    '未知錯誤'
+  );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+
 showLogin();
+
+
 </script>
+
+
 </body>
+
 </html>
